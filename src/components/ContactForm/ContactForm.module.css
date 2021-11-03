@@ -1,0 +1,62 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 220px;
+  border: 1px solid green;
+  width: 400px;
+  padding: 20px;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  width: 300px;
+  height: 40px;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: rgba(95, 158, 160, 0.048);
+  box-shadow: inset 2px 2px 6px rgba(0, 0, 0, 0.322);
+}
+
+.input:focus {
+  outline: none;
+  background-color: rgba(63, 150, 153, 0.144);
+  box-shadow: inset 3px 3px 8px rgba(0, 0, 0, 0.349);
+}
+
+.btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: rgba(95, 158, 160, 0.329);
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.322);
+  font-weight: 600;
+  font-size: 18px;
+  color: #3b3b3b;
+  transform: scale(1);
+
+  transition: transform 120ms ease-out, box-shadow 120ms ease-out,
+    color 120ms ease-out, background-color 120ms ease-out;
+}
+
+.btn:disabled {
+  opacity: 0.4;
+}
+
+.btn:hover:enabled {
+  background-color: rgba(50, 133, 136, 0.575);
+  color: #fff;
+}
+
+.btn:active {
+  background-color: rgba(14, 32, 194, 0.411);
+  color: #fff;
+  transform: scale(0.85);
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.445);
+}

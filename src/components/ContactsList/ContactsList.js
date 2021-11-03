@@ -1,3 +1,5 @@
+import s from 'components/ContactsList/ContactsList.module.css';
+
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 
@@ -8,7 +10,7 @@ class ContactsList extends Component {
 
   render() {
     return (
-      <ul>
+      <ul className={s.list}>
         {this.props.contacts.map(el => {
           return <ContactItem key={el.id} name={el.name} number={el.number} />;
         })}
