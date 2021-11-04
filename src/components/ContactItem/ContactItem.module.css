@@ -1,0 +1,11 @@
+.item {
+  display: flex;
+  outline: 1px solid black;
+  padding: 8px 16px;
+  border-radius: 4px;
+  box-shadow: var(--outer-shadow);
+}
+
+.item:not(:last-child) {
+  margin-bottom: 16px;
+}

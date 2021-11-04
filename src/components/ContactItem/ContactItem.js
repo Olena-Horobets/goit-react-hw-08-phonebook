@@ -1,3 +1,5 @@
+import s from 'components/ContactItem/ContactItem.module.css';
+
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 
@@ -6,7 +8,7 @@ class ContactItem extends Component {
 
   render() {
     return (
-      <li>
+      <li className={s.item}>
         {this.props.name} - {this.props.number}
       </li>
     );

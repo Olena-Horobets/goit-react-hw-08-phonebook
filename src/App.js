@@ -1,5 +1,9 @@
+import 'App.css';
+
 import { Component } from 'react';
 
+import Section from 'components/Section/Section';
+import { Header } from 'components/Header/Header';
 import { ContactForm } from 'components/ContactForm/ContactForm';
 import { ContactsList } from 'components/ContactsList/ContactsList';
 import INITIAL_DB from 'db/initialDB.json';
@@ -18,11 +22,15 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>Phonebook</h1>
-        <ContactForm onSubmit={this.formSubmitHandler} />
-        <h2>Contacts</h2>
-        {/* <Filter ... /> */}
-        <ContactsList contacts={this.state.contacts} />
+        <Header />
+        <div className="container">
+          <ContactForm onSubmit={this.formSubmitHandler} />
+
+          {/* <Filter ... /> */}
+          <Section class="contacts" title="Contacts">
+            <ContactsList contacts={this.state.contacts} />
+          </Section>
+        </div>
       </div>
     );
   }
