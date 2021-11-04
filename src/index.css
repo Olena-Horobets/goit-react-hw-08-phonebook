@@ -1,4 +1,8 @@
 :root {
+  --primary-bgr-color: rgba(95, 158, 160, 0.075);
+  --main-txt-color: #3b3b3b;
+  --white-color: #fff;
+
   --outer-shadow: 2px 2px 6px rgba(0, 0, 0, 0.322);
 }
 
@@ -9,9 +13,18 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-y: overlay;
+  background-color: var(--primary-bgr-color);
+  color: var(--main-txt-color);
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
 }

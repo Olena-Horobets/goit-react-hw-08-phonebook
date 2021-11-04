@@ -6,13 +6,19 @@ import PropTypes from 'prop-types';
 import { ContactItem } from 'components/ContactItem/ContactItem';
 
 class ContactsList extends Component {
-  state = {};
-
   render() {
     return (
       <ul className={s.list}>
         {this.props.contacts.map(el => {
-          return <ContactItem key={el.id} name={el.name} number={el.number} />;
+          return (
+            <ContactItem
+              key={el.id}
+              name={el.name}
+              number={el.number}
+              id={el.id}
+              onDelete={this.props.onDelete}
+            />
+          );
         })}
       </ul>
     );

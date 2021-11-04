@@ -1,11 +1,32 @@
 .item {
+  position: relative;
   display: flex;
-  outline: 1px solid black;
-  padding: 8px 16px;
+  height: 60px;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  padding: 8px 100px 8px 20px;
   border-radius: 4px;
   box-shadow: var(--outer-shadow);
+  background-color: var(--white-color);
+  cursor: pointer;
 }
 
 .item:not(:last-child) {
   margin-bottom: 16px;
+}
+
+.itemName {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.itemNumber {
+  font-size: 18px;
+}
+
+.itemControls {
+  position: absolute;
+  right: 20px;
+  bottom: 8px;
 }

@@ -3,31 +3,30 @@ import s from 'components/ContactForm/ContactForm.module.css';
 import { Component } from 'react';
 import shortId from 'short-id';
 
+import { Button } from 'components/Button/Button';
+
+const nameInputId = shortId.generate();
+const numberInputId = shortId.generate();
+
 class ContactForm extends Component {
   state = {
-    id: '',
     name: '',
     number: '',
   };
 
-  handleNameChange = e => {
-    this.setState({ name: e.currentTarget.value, id: e.currentTarget.id });
-  };
-
-  handleNumberChange = e => {
-    this.setState({ number: e.currentTarget.value });
+  handleChange = e => {
+    const { name, value } = e.currentTarget;
+    this.setState({ [name]: value });
   };
 
   handleSubmit = e => {
     e.preventDefault();
+
     this.props.onSubmit(this.state);
     this.setState({ name: '', number: '' });
   };
 
   render() {
-    console.log();
-    const nameInputId = shortId.generate();
-    const numberInputId = shortId.generate();
     return (
       <form onSubmit={this.handleSubmit} className={s.form}>
         <label htmlFor={nameInputId} className={s.label}>
@@ -37,7 +36,7 @@ class ContactForm extends Component {
             name="name"
             id={nameInputId}
             value={this.state.name}
-            onChange={this.handleNameChange}
+            onChange={this.handleChange}
             className={s.input}
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
             title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
@@ -46,14 +45,14 @@ class ContactForm extends Component {
           />
         </label>
         {this.state.name && (
-          <label htmlFor={numberInputId} className={s.label}>
+          <label htmlFor={numberInputId} className={s.emerged}>
             Phone number
             <input
               type="tel"
               name="number"
               id={numberInputId}
               value={this.state.number}
-              onChange={this.handleNumberChange}
+              onChange={this.handleChange}
               className={s.input}
               pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
               title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
@@ -63,9 +62,12 @@ class ContactForm extends Component {
           </label>
         )}
 
-        <button type="submit" className={s.btn} disabled={!this.state.number}>
-          Add contact
-        </button>
+        <Button
+          type="submit"
+          class="formBtn"
+          text="Add contact"
+          disabled={!this.state.number}
+        />
       </form>
     );
   }

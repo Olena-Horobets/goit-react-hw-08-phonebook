@@ -1,6 +1,7 @@
 import 'App.css';
 
 import { Component } from 'react';
+import shortId from 'short-id';
 
 import Section from 'components/Section/Section';
 import { Header } from 'components/Header/Header';
@@ -14,8 +15,17 @@ class App extends Component {
   };
 
   formSubmitHandler = data => {
+    const contactId = shortId.generate();
+    data.id = contactId;
+
     this.setState(({ contacts }) => {
       return { contacts: [...contacts, data] };
+    });
+  };
+
+  deleteContactHandler = id => {
+    this.setState(({ contacts }) => {
+      return { contacts: [...contacts].filter(el => el.id !== id) };
     });
   };
 
@@ -24,11 +34,16 @@ class App extends Component {
       <div className="App">
         <Header />
         <div className="container">
-          <ContactForm onSubmit={this.formSubmitHandler} />
+          <Section class="section" title="Create new contact">
+            <ContactForm onSubmit={this.formSubmitHandler} />
+          </Section>
 
           {/* <Filter ... /> */}
           <Section class="contacts" title="Contacts">
-            <ContactsList contacts={this.state.contacts} />
+            <ContactsList
+              contacts={this.state.contacts}
+              onDelete={this.deleteContactHandler}
+            />
           </Section>
         </div>
       </div>

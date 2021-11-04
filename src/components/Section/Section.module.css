@@ -1,11 +1,14 @@
 .section {
-  padding: 10px 20px;
-  text-align: center;
-  outline: 1px solid rgba(163, 63, 63, 0.479);
-  /* justify-content: center; */
+  padding: 0 30px;
 }
 
 .contacts {
   composes: section;
   width: 500px;
+}
+
+.title {
+  margin-bottom: 20px;
+  font-size: 28px;
+  font-weight: 600;
 }

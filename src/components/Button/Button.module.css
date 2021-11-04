@@ -1,0 +1,55 @@
+.btn {
+  border: none;
+  border-radius: 4px;
+  box-shadow: var(--outer-shadow);
+  font-weight: 600;
+  cursor: pointer;
+  transform: scale(1);
+
+  transition: transform 120ms ease-out, box-shadow 120ms ease-out,
+    color 120ms ease-out, background-color 120ms ease-out;
+}
+
+.btn:disabled {
+  opacity: 0.4;
+}
+
+.btn:active {
+  transform: scale(0.85);
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.445);
+}
+
+.formBtn {
+  composes: btn;
+  padding: 8px 16px;
+  font-size: 18px;
+  color: #3b3b3b;
+  background-color: rgba(95, 158, 160, 0.329);
+}
+
+.formBtn:hover:enabled {
+  background-color: rgba(50, 133, 136, 0.575);
+  color: #fff;
+}
+
+.formBtn:active:enabled {
+  background-color: rgba(14, 32, 194, 0.411);
+  color: #fff;
+}
+
+.deleteBtn {
+  composes: btn;
+  font-size: 10px;
+  background-color: rgba(252, 0, 0, 0.514);
+  color: #fff;
+  padding: 4px 10px;
+  letter-spacing: 1px;
+}
+
+.deleteBtn:hover {
+  background-color: rgba(252, 0, 0, 0.705);
+}
+
+.deleteBtn:active {
+  background-color: rgba(14, 32, 194, 0.726);
+}
