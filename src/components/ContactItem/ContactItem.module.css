@@ -5,11 +5,18 @@
   justify-content: space-between;
   align-items: flex-end;
 
-  padding: 8px 100px 8px 20px;
+  padding: 6px 20px;
   border-radius: 4px;
   box-shadow: var(--outer-shadow);
   background-color: var(--white-color);
   cursor: pointer;
+}
+
+.itemInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 }
 
 .item:not(:last-child) {
@@ -21,12 +28,41 @@
   font-weight: 600;
 }
 
+.iconName {
+  background-image: url(../../images/face.svg);
+  margin-right: 4px;
+}
+
+.iconNumber {
+  background-image: url(../../images/call.svg);
+  margin-right: 4px;
+}
+
 .itemNumber {
   font-size: 18px;
 }
 
 .itemControls {
-  position: absolute;
-  right: 20px;
-  bottom: 8px;
+  height: 100%;
+  padding-bottom: 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.blockContactLable {
+  display: flex;
+  align-items: baseline;
+  font-size: 14px;
+  font-weight: 600;
+  opacity: 0.7;
+  transition: opacity 150ms ease-out;
+}
+
+.blockContactLable:hover {
+  opacity: 1;
+}
+
+.blockContactCheckbox {
+  margin-left: 4px;
 }

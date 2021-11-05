@@ -1,4 +1,4 @@
-import s from 'components/Button/Button.module.css';
+import 'components/Button/Button.css';
 
 import { Component } from 'react';
 import PropTypes from 'prop-types';
@@ -8,7 +8,7 @@ class Button extends Component {
     return (
       <button
         type={this.props.type}
-        className={s[this.props.class]}
+        className={this.props.class}
         disabled={this.props.disabled}
         onClick={this.props.onClick}
       >

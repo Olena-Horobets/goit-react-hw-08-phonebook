@@ -4,6 +4,7 @@ import { Component } from 'react';
 import shortId from 'short-id';
 
 import { Button } from 'components/Button/Button';
+import classNames from 'classnames';
 
 const nameInputId = shortId.generate();
 const numberInputId = shortId.generate();
@@ -64,7 +65,7 @@ class ContactForm extends Component {
 
         <Button
           type="submit"
-          class="formBtn"
+          class={classNames('btn', 'formBtn')}
           text="Add contact"
           disabled={!this.state.number}
         />

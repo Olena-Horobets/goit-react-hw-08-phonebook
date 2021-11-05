@@ -16,6 +16,7 @@ body {
   overflow-y: overlay;
   background-color: var(--primary-bgr-color);
   color: var(--main-txt-color);
+  line-height: 1;
 }
 
 code {
@@ -27,4 +28,12 @@ h1,
 h2,
 p {
   margin: 0;
+}
+
+.icon {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  background-position: bottom;
+  background-size: contain;
 }
