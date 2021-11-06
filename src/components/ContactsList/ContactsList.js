@@ -15,8 +15,10 @@ class ContactsList extends Component {
               key={el.id}
               name={el.name}
               number={el.number}
+              isBlocked={el.isBlocked}
               id={el.id}
               onDelete={this.props.onDelete}
+              onBlock={this.props.onBlock}
             />
           );
         })}

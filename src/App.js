@@ -17,6 +17,7 @@ class App extends Component {
   formSubmitHandler = data => {
     const contactId = shortId.generate();
     data.id = contactId;
+    data.isBlocked = false;
 
     this.setState(({ contacts }) => {
       return { contacts: [...contacts, data] };
@@ -29,6 +30,23 @@ class App extends Component {
     });
   };
 
+  blockContactHandler = id => {
+    this.setState(({ contacts }) => {
+      return {
+        contacts: contacts.map(el => {
+          console.log(el);
+          if (el.id === id) {
+            el.isBlocked = !el.isBlocked;
+            console.log(el);
+          }
+          return el;
+        }),
+      };
+    });
+  };
+  //  this.setState(prevState => ({
+  //     isVisible: !prevState.isVisible,
+  //   }));
   render() {
     return (
       <div className="App">
@@ -43,6 +61,7 @@ class App extends Component {
             <ContactsList
               contacts={this.state.contacts}
               onDelete={this.deleteContactHandler}
+              onBlock={this.blockContactHandler}
             />
           </Section>
         </div>

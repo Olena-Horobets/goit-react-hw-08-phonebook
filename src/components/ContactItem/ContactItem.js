@@ -7,10 +7,8 @@ import PropTypes from 'prop-types';
 import { Button } from 'components/Button/Button';
 import classNames from 'classnames';
 
-const blockInputId = shortId.generate();
-
 class ContactItem extends Component {
-  state = { isHovered: false, isBlocked: false };
+  state = { isHovered: false };
 
   onContactHover = e => {
     this.setState({ isHovered: true });
@@ -25,12 +23,18 @@ class ContactItem extends Component {
   };
 
   onBlockContactToggle = e => {
-    this.setState(({ isBlocked }) => {
-      return { isBlocked: !isBlocked };
-    });
+    // this.setState(({ isBlocked }) => {
+    //   return { isBlocked: !isBlocked };
+    // });
+    // isBlocked: this.props.isBlocked;
+    console.log(this.props.id);
+    console.log(this.props.isBlocked);
+    this.props.onBlock(this.props.id);
   };
 
   render() {
+    console.log(this.props.isBlocked);
+    const blockInputId = shortId.generate();
     return (
       <li
         className={s.item}
@@ -49,13 +53,13 @@ class ContactItem extends Component {
         </div>
         <div className={s.itemControls}>
           <label className={s.blockContactLable} htmlFor={blockInputId}>
-            block contact
+            {this.props.isBlocked ? 'unblock contact' : 'block contact'}
             <input
               id={blockInputId}
               className={s.blockContactCheckbox}
               type="checkbox"
               onChange={this.onBlockContactToggle}
-              checked={this.state.isBlocked}
+              checked={this.props.isBlocked}
             />
           </label>
 
@@ -77,6 +81,11 @@ class ContactItem extends Component {
 
 ContactItem.propTypes = {
   name: PropTypes.string.isRequired,
+  number: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  isBlocked: PropTypes.bool,
+  onDelete: PropTypes.func,
+  onBlock: PropTypes.func,
 };
 
 export { ContactItem };
