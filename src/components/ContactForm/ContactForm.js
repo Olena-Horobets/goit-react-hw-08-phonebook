@@ -2,6 +2,7 @@ import s from 'components/ContactForm/ContactForm.module.css';
 
 import { Component } from 'react';
 import shortId from 'short-id';
+import PropTypes from 'prop-types';
 
 import { Button } from 'components/Button/Button';
 import classNames from 'classnames';
@@ -74,5 +75,9 @@ class ContactForm extends Component {
     );
   }
 }
+
+ContactForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
 
 export { ContactForm };

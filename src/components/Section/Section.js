@@ -6,7 +6,12 @@ class Section extends Component {
   render() {
     return (
       <div className={s[this.props.class]}>
-        {this.props.title && <h2 className={s.title}>{this.props.title}</h2>}
+        {this.props.title && (
+          <h2 className={s.title}>
+            <span className={s[this.props.class + 'Icon']}></span>
+            {this.props.title}
+          </h2>
+        )}
         {this.props.children}
       </div>
     );
@@ -15,6 +20,7 @@ class Section extends Component {
 
 Section.protoTypes = {
   title: PropTypes.string,
+  class: PropTypes.string,
 };
 
 export default Section;

@@ -21,11 +21,11 @@ class Button extends Component {
 
 Button.propTypes = {
   type: PropTypes.string.isRequired,
-  contactId: PropTypes.string,
-  class: PropTypes.string,
+  class: PropTypes.string.isRequired,
+  iconClass: PropTypes.string,
   text: PropTypes.string,
-  onClick: PropTypes.func,
   disabled: PropTypes.bool,
+  contactId: PropTypes.string,
 };
 
 export { Button };

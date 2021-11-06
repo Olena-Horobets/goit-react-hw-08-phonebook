@@ -1,6 +1,6 @@
 :root {
   --primary-bgr-color: rgba(95, 158, 160, 0.075);
-  --darker-bgr-color: rgba(63, 150, 153, 0.144);
+  --darker-bgr-color: rgba(63, 150, 153, 0.185);
   --accent-color: rgba(1, 107, 110, 0.774);
   --main-txt-color: #3b3b3b;
   --white-color: #fff;
@@ -30,12 +30,4 @@ h1,
 h2,
 p {
   margin: 0;
-}
-
-.icon {
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  background-position: bottom;
-  background-size: contain;
 }

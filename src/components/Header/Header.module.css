@@ -1,6 +1,6 @@
 .header {
   text-align: center;
-  background-color: rgba(95, 158, 160, 0.329);
+  background-color: var(--darker-bgr-color);
   box-shadow: var(--outer-shadow);
   padding: 16px;
 }

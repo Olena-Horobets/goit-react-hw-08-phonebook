@@ -14,6 +14,7 @@ class App extends Component {
   state = {
     contacts: [...INITIAL_DB],
     filter: '',
+    onlyBlockedRender: false,
   };
 
   formSubmitHandler = data => {
@@ -48,30 +49,55 @@ class App extends Component {
     });
   };
 
-  filterContactsHandler = e => {
-    this.setState({ filter: e.currentTarget.value });
-    console.log(e.currentTarget.value);
+  filterSearchedContactsHandler = e => {
+    this.setState({ filter: e.currentTarget.value, onlyBlockedRender: false });
   };
 
-  render() {
+  filterBlockedContacts = e => {
+    this.setState(({ onlyBlockedRender }) => {
+      return { onlyBlockedRender: !onlyBlockedRender };
+    });
+  };
+
+  onClearFilter = () => {
+    this.setState({ filter: '' });
+  };
+
+  renderSearchedContacts = () => {
     const searchValue = this.state.filter.toLocaleLowerCase();
-    const filteredContacts = this.state.contacts.filter(el =>
+    return this.state.contacts.filter(el =>
       el.name.toLowerCase().includes(searchValue),
     );
+  };
 
+  renderContacts = () =>
+    this.state.onlyBlockedRender
+      ? this.state.contacts.filter(el => el.isBlocked)
+      : this.state.contacts;
+
+  render() {
     return (
       <div className="App">
         <Header />
         <div className="container">
-          <Section class="section" title="Create new contact">
+          <Section class="newContact" title="Create new contact">
             <ContactForm onSubmit={this.formSubmitHandler} />
           </Section>
 
           <Section class="contacts" title="Contacts">
-            <Filter onSearch={this.filterContactsHandler} />
+            <Filter
+              onSearch={this.filterSearchedContactsHandler}
+              onClearFilter={this.onClearFilter}
+              onBlockedFilter={this.filterBlockedContacts}
+              renderBlocked={this.state.onlyBlockedRender}
+              searchValue={this.state.filter}
+              btnClass={this.state.filter ? 'filterBtnEmerged' : 'filterBtn'}
+            />
             <ContactsList
               contacts={
-                this.state.filter ? filteredContacts : this.state.contacts
+                this.state.filter
+                  ? this.renderSearchedContacts()
+                  : this.renderContacts()
               }
               onDelete={this.deleteContactHandler}
               onBlock={this.blockContactHandler}

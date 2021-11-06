@@ -1,6 +1,11 @@
+.wrapper {
+  position: relative;
+}
+
 .filter {
   position: relative;
   margin-bottom: 26px;
+  overflow: hidden;
 }
 
 .filterInput {
@@ -29,4 +34,62 @@
   opacity: 0.6;
   margin-left: 2px;
   background-image: url(../../images/search.svg);
+}
+
+.filterBtn {
+  position: absolute;
+  height: 100%;
+  width: 32px;
+  border: none;
+  background-color: var(--accent-color);
+  color: #fff;
+  font-weight: 600;
+  font-size: 16px;
+  border-radius: 4px;
+  transition: transform 150ms ease-out 300ms;
+}
+
+.filterBtnEmerged {
+  composes: filterBtn;
+  transform: translateX(-100%);
+}
+
+.renderFilter {
+  position: absolute;
+  top: -30px;
+  right: 0;
+  transform: translateY(-50%);
+}
+
+.renderLabel {
+  font-weight: 700;
+  font-size: 20px;
+  color: rgba(63, 150, 153, 0.493);
+}
+
+.renderLabel:not(:last-child) {
+  margin-right: 12px;
+}
+
+.radioInput {
+  width: 0;
+  height: 0;
+}
+
+.renderList {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin-left: 4px;
+  border: 2px solid var(--accent-color);
+  border-radius: 50%;
+}
+
+.renderLabelChecked {
+  composes: renderLabel;
+  color: var(--accent-color);
+}
+
+.renderLabelChecked .renderList {
+  background-color: var(--accent-color);
 }

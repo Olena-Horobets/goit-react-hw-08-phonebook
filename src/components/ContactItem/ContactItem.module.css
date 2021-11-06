@@ -14,7 +14,7 @@
 
 .itemBlocked {
   composes: item;
-  background-color: var(--darker-bgr-color);
+  background-color: rgba(253, 255, 109, 0.144);
   color: #3b3b3b70;
 }
 
@@ -36,12 +36,14 @@
 
 .iconName {
   background-image: url(../../images/face.svg);
-  margin-right: 4px;
+  margin-right: 6px;
+  transform: translateY(2px);
 }
 
 .iconNumber {
   background-image: url(../../images/call.svg);
-  margin-right: 4px;
+  margin-right: 6px;
+  transform: translateY(1px);
 }
 
 .itemNumber {
