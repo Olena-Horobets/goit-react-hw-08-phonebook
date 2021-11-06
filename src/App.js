@@ -31,22 +31,21 @@ class App extends Component {
   };
 
   blockContactHandler = id => {
-    this.setState(({ contacts }) => {
+    this.setState(prevState => {
       return {
-        contacts: contacts.map(el => {
-          console.log(el);
+        contacts: prevState.contacts.map(el => {
           if (el.id === id) {
-            el.isBlocked = !el.isBlocked;
-            console.log(el);
+            el = {
+              ...el,
+              isBlocked: !el.isBlocked,
+            };
           }
           return el;
         }),
       };
     });
   };
-  //  this.setState(prevState => ({
-  //     isVisible: !prevState.isVisible,
-  //   }));
+
   render() {
     return (
       <div className="App">

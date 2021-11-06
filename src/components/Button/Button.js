@@ -13,6 +13,7 @@ class Button extends Component {
         onClick={this.props.onClick}
       >
         {this.props.text}
+        <span className={this.props.iconClass}></span>
       </button>
     );
   }

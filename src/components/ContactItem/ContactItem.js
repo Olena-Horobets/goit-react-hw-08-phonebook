@@ -23,21 +23,14 @@ class ContactItem extends Component {
   };
 
   onBlockContactToggle = e => {
-    // this.setState(({ isBlocked }) => {
-    //   return { isBlocked: !isBlocked };
-    // });
-    // isBlocked: this.props.isBlocked;
-    console.log(this.props.id);
-    console.log(this.props.isBlocked);
     this.props.onBlock(this.props.id);
   };
 
   render() {
-    console.log(this.props.isBlocked);
     const blockInputId = shortId.generate();
     return (
       <li
-        className={s.item}
+        className={s[this.props.isBlocked ? 'itemBlocked' : 'item']}
         onMouseOver={this.onContactHover}
         onMouseLeave={this.onContactHoverLeave}
       >
@@ -51,8 +44,14 @@ class ContactItem extends Component {
             {this.props.number}
           </span>
         </div>
+
         <div className={s.itemControls}>
-          <label className={s.blockContactLable} htmlFor={blockInputId}>
+          <label
+            className={
+              s[this.props.isBlocked ? 'chbLabelBlocked' : 'chbLableNormal']
+            }
+            htmlFor={blockInputId}
+          >
             {this.props.isBlocked ? 'unblock contact' : 'block contact'}
             <input
               id={blockInputId}
@@ -61,6 +60,11 @@ class ContactItem extends Component {
               onChange={this.onBlockContactToggle}
               checked={this.props.isBlocked}
             />
+            <span
+              className={
+                s[this.props.isBlocked ? 'chbIconBlocked' : 'chbIconNormal']
+              }
+            ></span>
           </label>
 
           <Button
@@ -68,6 +72,7 @@ class ContactItem extends Component {
             class={classNames('btn', 'deleteBtn', {
               emergedBtn: this.state.isHovered,
             })}
+            iconClass={'deleteIcon'}
             text="DELETE"
             onClick={this.onDeleteContact}
             contactId={this.props.id}

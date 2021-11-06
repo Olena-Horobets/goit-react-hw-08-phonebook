@@ -48,6 +48,6 @@
 
 .input:focus {
   outline: none;
-  background-color: rgba(63, 150, 153, 0.144);
+  background-color: var(--darker-bgr-color);
   box-shadow: inset 3px 3px 8px rgba(0, 0, 0, 0.349);
 }

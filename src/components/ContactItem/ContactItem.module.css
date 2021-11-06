@@ -12,6 +12,12 @@
   cursor: pointer;
 }
 
+.itemBlocked {
+  composes: item;
+  background-color: var(--darker-bgr-color);
+  color: #3b3b3b70;
+}
+
 .itemInfo {
   display: flex;
   flex-direction: column;
@@ -51,19 +57,46 @@
   align-items: flex-end;
 }
 
-.blockContactLable {
+.chbLableNormal {
   display: flex;
   align-items: baseline;
   font-size: 14px;
   font-weight: 600;
-  opacity: 0.7;
-  transition: opacity 150ms ease-out;
+  opacity: 0.6;
+  transition: opacity 150ms ease-out, color 150ms ease-out;
 }
 
-.blockContactLable:hover {
+.chbLabelBlocked {
+  composes: chbLableNormal;
   opacity: 1;
 }
 
+.chbLableNormal:hover {
+  opacity: 1;
+}
+
+.chbLabelBlocked:hover {
+  color: var(--accent-color);
+}
+
 .blockContactCheckbox {
+  width: 0;
+  height: 0;
+}
+
+.chbIcon {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
   margin-left: 4px;
+}
+
+.chbIconNormal {
+  composes: chbIcon;
+  background-image: url(../../images/cell.svg);
+}
+
+.chbIconBlocked {
+  composes: chbIcon;
+  background-image: url(../../images/no_cell.svg);
 }
