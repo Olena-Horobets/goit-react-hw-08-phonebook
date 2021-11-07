@@ -34,15 +34,23 @@
   font-weight: 600;
 }
 
-.iconName {
-  background-image: url(../../images/face.svg);
+.icon {
+  display: inline-block;
+  background-size: contain;
+  width: 18px;
+  height: 18px;
   margin-right: 6px;
+}
+
+.iconName {
+  composes: icon;
+  background-image: url(../../images/face.svg);
   transform: translateY(2px);
 }
 
 .iconNumber {
+  composes: icon;
   background-image: url(../../images/call.svg);
-  margin-right: 6px;
   transform: translateY(1px);
 }
 

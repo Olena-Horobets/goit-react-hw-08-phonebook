@@ -36,11 +36,11 @@ class ContactItem extends Component {
       >
         <div className={s.itemInfo}>
           <span className={s.itemName}>
-            <span className={classNames('icon', s['iconName'])}></span>
+            <span className={s['iconName']}></span>
             {this.props.name}
           </span>
           <span className={s.itemNumber}>
-            <span className={classNames('icon', s['iconNumber'])}></span>
+            <span className={s['iconNumber']}></span>
             {this.props.number}
           </span>
         </div>
