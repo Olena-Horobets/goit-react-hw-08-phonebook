@@ -8,6 +8,7 @@ import { Header } from 'components/Header/Header';
 import { ContactForm } from 'components/ContactForm/ContactForm';
 import { ContactsList } from 'components/ContactsList/ContactsList';
 import { Filter } from 'components/Filter/Filter';
+import { EmptyMessage } from 'components/EmptyMessage/EmptyMessage';
 
 import INITIAL_DB from 'db/initialDB.json';
 
@@ -19,9 +20,16 @@ class App extends Component {
   };
 
   formSubmitHandler = data => {
-    const contactId = shortId.generate();
-    data.id = contactId;
+    data.id = shortId.generate();
     data.isBlocked = false;
+
+    const savedContact = this.state.contacts.find(
+      el => el.number === data.number,
+    );
+    if (savedContact) {
+      alert(`This number is already saved under "${savedContact.name}" name`);
+    }
+
     if (this.state.contacts.some(el => el.name === data.name)) {
       const newName = prompt(
         'This name is alreday used. Please, use different name',
@@ -77,12 +85,18 @@ class App extends Component {
     );
   };
 
-  renderContacts = () =>
-    this.state.onlyBlockedRender
-      ? this.state.contacts.filter(el => el.isBlocked)
-      : this.state.contacts;
+  getVisibleContacts = () => {
+    if (this.state.filter) {
+      return this.renderSearchedContacts();
+    } else {
+      return this.state.onlyBlockedRender
+        ? this.state.contacts.filter(el => el.isBlocked)
+        : this.state.contacts;
+    }
+  };
 
   render() {
+    const contactList = this.getVisibleContacts();
     return (
       <div className="App">
         <Header />
@@ -100,15 +114,15 @@ class App extends Component {
               searchValue={this.state.filter}
               btnClass={this.state.filter ? 'filterBtnEmerged' : 'filterBtn'}
             />
-            <ContactsList
-              contacts={
-                this.state.filter
-                  ? this.renderSearchedContacts()
-                  : this.renderContacts()
-              }
-              onDelete={this.deleteContactHandler}
-              onBlock={this.blockContactHandler}
-            />
+            {contactList.length ? (
+              <ContactsList
+                contacts={contactList}
+                onDelete={this.deleteContactHandler}
+                onBlock={this.blockContactHandler}
+              />
+            ) : (
+              <EmptyMessage message="Nothing found" />
+            )}
           </Section>
         </div>
       </div>
