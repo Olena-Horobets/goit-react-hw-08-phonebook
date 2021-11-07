@@ -8,6 +8,7 @@ import { Header } from 'components/Header/Header';
 import { ContactForm } from 'components/ContactForm/ContactForm';
 import { ContactsList } from 'components/ContactsList/ContactsList';
 import { Filter } from 'components/Filter/Filter';
+
 import INITIAL_DB from 'db/initialDB.json';
 
 class App extends Component {
@@ -21,6 +22,12 @@ class App extends Component {
     const contactId = shortId.generate();
     data.id = contactId;
     data.isBlocked = false;
+    if (this.state.contacts.some(el => el.name === data.name)) {
+      const newName = prompt(
+        'This name is alreday used. Please, use different name',
+      );
+      data.name = newName;
+    }
 
     this.setState(({ contacts }) => {
       return { contacts: [...contacts, data] };
