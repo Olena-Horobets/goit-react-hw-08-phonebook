@@ -4,6 +4,8 @@ import { Component } from 'react';
 import shortId from 'short-id';
 import PropTypes from 'prop-types';
 
+import { ReactComponent as ReactSprite } from 'images/sprite.svg';
+
 class Filter extends Component {
   render() {
     const radioInpAllId = shortId.generate();
@@ -11,6 +13,7 @@ class Filter extends Component {
 
     return (
       <div className={s.wrapper}>
+        <ReactSprite />
         <div className={s.renderFilter}>
           <label
             htmlFor={radioInpAllId}
@@ -51,7 +54,9 @@ class Filter extends Component {
         </div>
 
         <div className={s.filter}>
-          <span className={s.filterIcon}></span>
+          <svg className={s.filterIcon}>
+            <use href={'#icon-search'}></use>
+          </svg>
           <input
             className={s.filterInput}
             name="filter"

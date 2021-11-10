@@ -1,4 +1,7 @@
+/* common button styles */
 .btn {
+  display: inline-flex;
+  align-items: center;
   border: none;
   border-radius: 4px;
   box-shadow: var(--outer-shadow);
@@ -6,18 +9,18 @@
   cursor: pointer;
   transform: scale(1);
 
-  transition: transform 120ms ease-out, box-shadow 120ms ease-out,
-    color 120ms ease-out, background-color 120ms ease-out;
+  transition: transform var(--main-animation), box-shadow var(--main-animation),
+    color var(--main-animation), background-color var(--main-animation);
 }
 
 .btn::before {
   position: absolute;
-  top: -10%;
-  left: -10%;
+  top: -8%;
+  left: -8%;
   content: '';
   display: block;
-  width: 110%;
-  height: 110%;
+  width: 115%;
+  height: 115%;
   border-radius: 4px;
   background-color: transparent;
 }
@@ -31,27 +34,36 @@
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.445);
 }
 
+/* form button specifically */
 .formBtn {
   padding: 8px 16px;
   font-size: 18px;
-  color: #3b3b3b;
-  background-color: rgba(95, 158, 160, 0.329);
+  color: var(--main-txt-color);
+  background-color: var(--primary-btn);
 }
 
 .formBtn:hover:enabled {
   background-color: rgba(50, 133, 136, 0.575);
-  color: #fff;
+  color: var(--white-color);
 }
 
 .formBtn:active:enabled {
   background-color: rgba(14, 32, 194, 0.411);
-  color: #fff;
+  color: var(--white-color);
 }
 
+.formBtnIcon {
+  width: 18px;
+  height: 18px;
+  margin-left: 4px;
+  fill: currentColor;
+}
+
+/* contacts item button specifically */
 .deleteBtn {
   font-size: 10px;
   background-color: rgba(252, 0, 0, 0.514);
-  color: #fff;
+  color: var(--white-color);
   padding: 4px 10px;
   letter-spacing: 1px;
 
@@ -74,25 +86,8 @@
 }
 
 .deleteIcon {
-  display: inline-block;
   width: 12px;
   height: 12px;
-  transform: translateY(2px);
   margin-left: 2px;
-
-  background-size: cover;
-  background-position: bottom;
-  background-image: url(../../images/delete.svg);
-}
-
-.formBtnIcon {
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  margin-left: 4px;
-
-  background-size: contain;
-  background-position: center;
-  transform: translateY(2px);
-  background-image: url(../../images/add_box.svg);
+  fill: currentColor;
 }

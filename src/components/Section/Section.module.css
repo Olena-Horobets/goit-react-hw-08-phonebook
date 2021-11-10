@@ -12,27 +12,16 @@
 }
 
 .title {
+  display: flex;
+  align-items: flex-end;
   margin-bottom: 20px;
   font-size: 28px;
   font-weight: 600;
 }
 
-.icon {
-  display: inline-block;
+.titleIcon {
   width: 24px;
   height: 24px;
-  transform: translateY(2px);
   margin-right: 6px;
-  background-position: bottom;
-  background-size: contain;
-}
-
-.newContactIcon {
-  composes: icon;
-  background-image: url(../../images/add_ic_call.svg);
-}
-
-.contactsIcon {
-  composes: icon;
-  background-image: url(../../images/contacts.svg);
+  fill: currentColor;
 }

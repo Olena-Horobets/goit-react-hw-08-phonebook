@@ -3,9 +3,10 @@ import s from 'components/ContactItem/ContactItem.module.css';
 import { Component } from 'react';
 import shortId from 'short-id';
 import PropTypes from 'prop-types';
-
 import { Button } from 'components/Button/Button';
+
 import classNames from 'classnames';
+import { ReactComponent as ReactSprite } from 'images/sprite.svg';
 
 class ContactItem extends Component {
   state = { isHovered: false };
@@ -34,13 +35,18 @@ class ContactItem extends Component {
         onMouseOver={this.onContactHover}
         onMouseLeave={this.onContactHoverLeave}
       >
+        <ReactSprite />
         <div className={s.itemInfo}>
           <span className={s.itemName}>
-            <span className={s['iconName']}></span>
+            <svg className={s.itemIcon}>
+              <use href={'#icon-face'}></use>
+            </svg>
             {this.props.name}
           </span>
           <span className={s.itemNumber}>
-            <span className={s['iconNumber']}></span>
+            <svg className={s.itemIcon}>
+              <use href={'#icon-call'}></use>
+            </svg>
             {this.props.number}
           </span>
         </div>
@@ -48,7 +54,7 @@ class ContactItem extends Component {
         <div className={s.itemControls}>
           <label
             className={
-              s[this.props.isBlocked ? 'chbLabelBlocked' : 'chbLableNormal']
+              s[this.props.isBlocked ? 'checkLabelBlocked' : 'checkLableNormal']
             }
             htmlFor={blockInputId}
           >
@@ -60,11 +66,11 @@ class ContactItem extends Component {
               onChange={this.onBlockContactToggle}
               checked={this.props.isBlocked}
             />
-            <span
-              className={
-                s[this.props.isBlocked ? 'chbIconBlocked' : 'chbIconNormal']
-              }
-            ></span>
+            <svg className={s.checkIcon}>
+              <use
+                href={`#${this.props.isBlocked ? 'icon-no_cell' : 'icon-cell'}`}
+              ></use>
+            </svg>
           </label>
 
           <Button
@@ -73,6 +79,7 @@ class ContactItem extends Component {
               emergedBtn: this.state.isHovered,
             })}
             iconClass={'deleteIcon'}
+            iconName={'icon-delete'}
             text="DELETE"
             onClick={this.onDeleteContact}
             contactId={this.props.id}

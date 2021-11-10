@@ -101,11 +101,15 @@ class App extends Component {
       <div className="App">
         <Header />
         <div className="container">
-          <Section class="newContact" title="Create new contact">
+          <Section
+            class="newContact"
+            title="Create new contact"
+            iconName={'icon-add_ic_call'}
+          >
             <ContactForm onSubmit={this.formSubmitHandler} />
           </Section>
 
-          <Section class="contacts" title="Contacts">
+          <Section class="contacts" title="Contacts" iconName={'icon-contacts'}>
             <Filter
               onSearch={this.filterSearchedContactsHandler}
               onClearFilter={this.onClearFilter}

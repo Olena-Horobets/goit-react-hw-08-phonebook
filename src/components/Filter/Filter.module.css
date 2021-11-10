@@ -17,23 +17,27 @@
   border-radius: 4px;
   background-color: var(--darker-bgr-color);
   box-shadow: inset 3px 3px 8px rgba(0, 0, 0, 0.349);
+
+  transition: background-color var(--main-animation),
+    box-shadow var(--main-animation);
 }
 
 .filterInput:focus {
   outline: none;
-  box-shadow: inset 3px 3px 8px rgba(8, 0, 54, 0.466);
+  background-color: var(--primary-btn);
+  box-shadow: inset 4px 4px 12px rgba(8, 0, 54, 0.548),
+    inset -1px -1px 4px rgba(8, 0, 54, 0.185);
 }
 
 .filterIcon {
-  display: inline-block;
   width: 24px;
   height: 24px;
   position: absolute;
   top: 4px;
   left: 4px;
+  fill: var(--main-txt-color);
   opacity: 0.6;
   margin-left: 2px;
-  background-image: url(../../images/search.svg);
 }
 
 .filterBtn {
@@ -42,7 +46,7 @@
   width: 32px;
   border: none;
   background-color: var(--accent-color);
-  color: #fff;
+  color: var(--white-color);
   font-weight: 600;
   font-size: 16px;
   border-radius: 4px;
