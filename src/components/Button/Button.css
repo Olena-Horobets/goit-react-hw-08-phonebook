@@ -10,6 +10,18 @@
     color 120ms ease-out, background-color 120ms ease-out;
 }
 
+.btn::before {
+  position: absolute;
+  top: -10%;
+  left: -10%;
+  content: '';
+  display: block;
+  width: 110%;
+  height: 110%;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
 .btn:disabled {
   opacity: 0.4;
 }
