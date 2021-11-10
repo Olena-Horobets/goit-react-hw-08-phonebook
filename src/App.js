@@ -10,14 +10,28 @@ import { ContactsList } from 'components/ContactsList/ContactsList';
 import { Filter } from 'components/Filter/Filter';
 import { EmptyMessage } from 'components/EmptyMessage/EmptyMessage';
 
-import INITIAL_DB from 'db/initialDB.json';
+const CONTACTS = 'contacts';
 
 class App extends Component {
   state = {
-    contacts: [...INITIAL_DB],
+    contacts: [],
     filter: '',
     onlyBlockedRender: false,
   };
+
+  componentDidMount() {
+    const savedContacts = localStorage.getItem(CONTACTS);
+
+    savedContacts && this.setState({ contacts: JSON.parse(savedContacts) });
+  }
+
+  componentDidUpdate(prevState) {
+    const newContacts = this.state.contacts;
+    const prevContacts = prevState.contacts;
+
+    newContacts !== prevContacts &&
+      localStorage.setItem(CONTACTS, JSON.stringify(newContacts));
+  }
 
   formSubmitHandler = data => {
     data.id = shortId.generate();
