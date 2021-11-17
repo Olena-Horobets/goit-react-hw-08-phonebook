@@ -1,12 +1,9 @@
 import s from 'components/EmptyMessage/EmptyMessage.module.css';
 
-import { Component } from 'react';
 import PropTypes from 'prop-types';
 
-class EmptyMessage extends Component {
-  render() {
-    return <p className={s.message}>{this.props.message}</p>;
-  }
+function EmptyMessage({ message }) {
+  return <p className={s.message}>{message}</p>;
 }
 
 EmptyMessage.propTypes = {

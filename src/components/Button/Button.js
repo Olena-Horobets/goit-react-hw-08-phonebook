@@ -1,38 +1,42 @@
 import 'components/Button/Button.css';
 
-import { Component } from 'react';
 import PropTypes from 'prop-types';
-
 import { ReactComponent as ReactSprite } from 'images/sprite.svg';
 
-class Button extends Component {
-  render() {
-    return (
-      <button
-        type={this.props.type}
-        className={this.props.class}
-        disabled={this.props.disabled}
-        onClick={this.props.onClick}
-      >
-        <ReactSprite />
-        {this.props.text}
+function Button({
+  type,
+  styledClass,
+  iconClass = '',
+  iconName = '',
+  text = '',
+  disabled = false,
+  onClick = null,
+}) {
+  return (
+    <button
+      type={type}
+      className={styledClass}
+      disabled={disabled}
+      onClick={onClick}
+    >
+      <ReactSprite />
+      {text}
 
-        <svg className={this.props.iconClass}>
-          <use href={`#${this.props.iconName}`}></use>
-        </svg>
-      </button>
-    );
-  }
+      <svg className={iconClass}>
+        <use href={`#${iconName}`}></use>
+      </svg>
+    </button>
+  );
 }
 
 Button.propTypes = {
   type: PropTypes.string.isRequired,
-  class: PropTypes.string.isRequired,
+  styledClass: PropTypes.string.isRequired,
   iconClass: PropTypes.string,
   iconName: PropTypes.string,
   text: PropTypes.string,
   disabled: PropTypes.bool,
-  contactId: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 export { Button };

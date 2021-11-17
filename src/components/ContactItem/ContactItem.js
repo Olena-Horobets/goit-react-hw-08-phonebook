@@ -75,14 +75,13 @@ class ContactItem extends Component {
 
           <Button
             type="button"
-            class={classNames('btn', 'deleteBtn', {
+            styledClass={classNames('btn', 'deleteBtn', {
               emergedBtn: this.state.isHovered,
             })}
             iconClass={'deleteIcon'}
             iconName={'icon-delete'}
             text="DELETE"
             onClick={this.onDeleteContact}
-            contactId={this.props.id}
             disabled={false}
           />
         </div>

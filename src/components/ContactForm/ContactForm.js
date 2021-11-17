@@ -70,7 +70,7 @@ class ContactForm extends Component {
 
         <Button
           type="submit"
-          class={classNames('btn', 'formBtn')}
+          styledClass={classNames('btn', 'formBtn')}
           iconName={'icon-add'}
           iconClass={'formBtnIcon'}
           text="Add contact"
