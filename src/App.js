@@ -1,6 +1,6 @@
 import 'App.css';
 
-import { Component } from 'react';
+import { useState, useEffect } from 'react';
 import shortId from 'short-id';
 
 import Section from 'components/Section/Section';
@@ -12,144 +12,120 @@ import { EmptyMessage } from 'components/EmptyMessage/EmptyMessage';
 
 const CONTACTS = 'contacts';
 
-class App extends Component {
-  state = {
-    contacts: [],
-    filter: '',
-    onlyBlockedRender: false,
-  };
+function App() {
+  const [contacts, setContacts] = useState([]);
+  const [filter, setFilter] = useState('');
+  const [onlyBlockedRender, setOnlyBlockedRender] = useState(false);
 
-  componentDidMount() {
+  useEffect(() => {
     const savedContacts = localStorage.getItem(CONTACTS);
+    savedContacts && setContacts(JSON.parse(savedContacts));
+  }, []);
 
-    savedContacts && this.setState({ contacts: JSON.parse(savedContacts) });
-  }
+  useEffect(() => {
+    localStorage.setItem(CONTACTS, JSON.stringify(contacts));
+  }, [contacts]);
 
-  componentDidUpdate(prevState) {
-    const newContacts = this.state.contacts;
-    const prevContacts = prevState.contacts;
-
-    newContacts !== prevContacts &&
-      localStorage.setItem(CONTACTS, JSON.stringify(newContacts));
-  }
-
-  formSubmitHandler = data => {
+  const formSubmitHandler = data => {
     data.id = shortId.generate();
     data.isBlocked = false;
 
-    const savedContact = this.state.contacts.find(
-      el => el.number === data.number,
-    );
+    const savedContact = contacts.find(el => el.number === data.number);
     if (savedContact) {
       alert(`This number is already saved under "${savedContact.name}" name`);
     }
 
-    if (this.state.contacts.some(el => el.name === data.name)) {
+    if (contacts.some(el => el.name === data.name)) {
       const newName = prompt(
         'This name is alreday used. Please, use different name',
       );
       data.name = newName;
     }
 
-    this.setState(({ contacts }) => {
-      return { contacts: [...contacts, data] };
-    });
+    setContacts(prev => [...prev, data]);
   };
 
-  deleteContactHandler = id => {
-    this.setState(({ contacts }) => {
-      return { contacts: [...contacts].filter(el => el.id !== id) };
-    });
+  const deleteContactHandler = id => {
+    setContacts(prev => prev.filter(el => el.id !== id));
   };
 
-  blockContactHandler = id => {
-    this.setState(prevState => {
-      return {
-        contacts: prevState.contacts.map(el => {
-          if (el.id === id) {
-            el = {
-              ...el,
-              isBlocked: !el.isBlocked,
-            };
-          }
-          return el;
-        }),
-      };
-    });
-  };
-
-  filterSearchedContactsHandler = e => {
-    this.setState({ filter: e.currentTarget.value, onlyBlockedRender: false });
-  };
-
-  filterBlockedContacts = e => {
-    this.setState(({ onlyBlockedRender }) => {
-      return { onlyBlockedRender: !onlyBlockedRender };
-    });
-  };
-
-  onClearFilter = () => {
-    this.setState({ filter: '' });
-  };
-
-  renderSearchedContacts = () => {
-    const searchValue = this.state.filter.toLocaleLowerCase();
-    return this.state.contacts.filter(el =>
-      el.name.toLowerCase().includes(searchValue),
+  const blockContactHandler = id => {
+    setContacts(prev =>
+      prev.map(el => {
+        if (el.id === id) {
+          el = {
+            ...el,
+            isBlocked: !el.isBlocked,
+          };
+        }
+        return el;
+      }),
     );
   };
 
-  getVisibleContacts = () => {
-    if (this.state.filter) {
-      return this.renderSearchedContacts();
+  const filterSearchedContactsHandler = e => {
+    setFilter(e.currentTarget.value);
+    setOnlyBlockedRender(false);
+  };
+
+  const filterBlockedContacts = e => {
+    setOnlyBlockedRender(prev => !prev);
+  };
+
+  const renderSearchedContacts = () => {
+    const searchValue = filter.toLocaleLowerCase();
+    return contacts.filter(el => el.name.toLowerCase().includes(searchValue));
+  };
+
+  const getVisibleContacts = () => {
+    if (filter) {
+      return renderSearchedContacts();
     } else {
-      return this.state.onlyBlockedRender
-        ? this.state.contacts.filter(el => el.isBlocked)
-        : this.state.contacts;
+      return onlyBlockedRender ? contacts.filter(el => el.isBlocked) : contacts;
     }
   };
 
-  render() {
-    const contactList = this.getVisibleContacts();
-    return (
-      <div className="App">
-        <Header />
-        <div className="container">
-          <Section
-            styledClass="newContact"
-            title="Create new contact"
-            iconName={'icon-add_ic_call'}
-          >
-            <ContactForm onSubmit={this.formSubmitHandler} />
-          </Section>
+  const contactList = getVisibleContacts();
+  return (
+    <div className="App">
+      <Header />
+      <div className="container">
+        <Section
+          styledClass="newContact"
+          title="Create new contact"
+          iconName={'icon-add_ic_call'}
+        >
+          <ContactForm onSubmit={formSubmitHandler} />
+        </Section>
 
-          <Section
-            styledClass="contacts"
-            title="Contacts"
-            iconName={'icon-contacts'}
-          >
-            <Filter
-              onSearch={this.filterSearchedContactsHandler}
-              onClearFilter={this.onClearFilter}
-              onBlockedFilter={this.filterBlockedContacts}
-              renderBlocked={this.state.onlyBlockedRender}
-              searchValue={this.state.filter}
-              btnClass={this.state.filter ? 'filterBtnEmerged' : 'filterBtn'}
+        <Section
+          styledClass="contacts"
+          title="Contacts"
+          iconName={'icon-contacts'}
+        >
+          <Filter
+            onSearch={filterSearchedContactsHandler}
+            onClearFilter={() => {
+              setFilter('');
+            }}
+            onBlockedFilter={filterBlockedContacts}
+            renderBlocked={onlyBlockedRender}
+            searchValue={filter}
+            btnClass={filter ? 'filterBtnEmerged' : 'filterBtn'}
+          />
+          {contactList.length ? (
+            <ContactsList
+              contacts={contactList}
+              onDelete={deleteContactHandler}
+              onBlock={blockContactHandler}
             />
-            {contactList.length ? (
-              <ContactsList
-                contacts={contactList}
-                onDelete={this.deleteContactHandler}
-                onBlock={this.blockContactHandler}
-              />
-            ) : (
-              <EmptyMessage message="Nothing found" />
-            )}
-          </Section>
-        </div>
+          ) : (
+            <EmptyMessage message="Nothing found" />
+          )}
+        </Section>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 export { App };
