@@ -13,14 +13,13 @@ import { EmptyMessage } from 'components/EmptyMessage/EmptyMessage';
 const CONTACTS = 'contacts';
 
 function App() {
-  const [contacts, setContacts] = useState([]);
+  const [contacts, setContacts] = useState(() => {
+    return localStorage.getItem(CONTACTS)
+      ? JSON.parse(localStorage.getItem(CONTACTS))
+      : [];
+  });
   const [filter, setFilter] = useState('');
   const [onlyBlockedRender, setOnlyBlockedRender] = useState(false);
-
-  useEffect(() => {
-    const savedContacts = localStorage.getItem(CONTACTS);
-    savedContacts && setContacts(JSON.parse(savedContacts));
-  }, []);
 
   useEffect(() => {
     localStorage.setItem(CONTACTS, JSON.stringify(contacts));
