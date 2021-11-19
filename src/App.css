@@ -1,8 +1,16 @@
 .container {
-  width: 900px;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
   padding: 30px;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+}
+
+@media screen and (min-width: 1000px) {
+  .container {
+    width: 900px;
+    flex-direction: row;
+    justify-content: space-between;
+  }
 }

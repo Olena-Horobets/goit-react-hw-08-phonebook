@@ -4,7 +4,7 @@
 
 .filter {
   position: relative;
-  margin-bottom: 26px;
+  margin-bottom: 20px;
   overflow: hidden;
 }
 
@@ -60,14 +60,14 @@
 
 .renderFilter {
   position: absolute;
-  top: -30px;
+  top: -26px;
   right: 0;
   transform: translateY(-50%);
 }
 
 .renderLabel {
   font-weight: 700;
-  font-size: 20px;
+  font-size: 18px;
   color: rgba(63, 150, 153, 0.493);
 }
 
@@ -96,4 +96,18 @@
 
 .renderLabelChecked .renderList {
   background-color: var(--accent-color);
+}
+
+@media screen and (min-width: 1000px) {
+  .filter {
+    margin-bottom: 26px;
+  }
+
+  .renderFilter {
+    top: -30px;
+  }
+
+  .renderLabel {
+    font-size: 20px;
+  }
 }

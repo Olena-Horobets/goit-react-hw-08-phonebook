@@ -5,7 +5,7 @@
   justify-content: space-between;
   align-items: flex-end;
 
-  padding: 6px 20px;
+  padding: 6px 8px;
   border-radius: 4px;
   box-shadow: var(--outer-shadow);
   background-color: var(--white-color);
@@ -40,12 +40,12 @@
 }
 
 .itemName {
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 600;
 }
 
 .itemNumber {
-  font-size: 18px;
+  font-size: 14px;
 }
 
 .itemControls {
@@ -60,7 +60,7 @@
 .checkLableNormal {
   display: flex;
   align-items: baseline;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 600;
   opacity: 0.6;
   transition: opacity var(--main-animation), color var(--main-animation);
@@ -89,4 +89,22 @@
   height: 12px;
   margin-left: 4px;
   fill: currentColor;
+}
+
+@media screen and (min-width: 1000px) {
+  .item {
+    padding: 6px 20px;
+  }
+
+  .itemName {
+    font-size: 20px;
+  }
+
+  .itemNumber {
+    font-size: 18px;
+  }
+
+  .checkLableNormal {
+    font-size: 14px;
+  }
 }

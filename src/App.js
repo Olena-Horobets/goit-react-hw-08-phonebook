@@ -42,6 +42,7 @@ function App() {
     }
 
     setContacts(prev => [...prev, data]);
+    setOnlyBlockedRender(false);
   };
 
   const deleteContactHandler = id => {
