@@ -5,7 +5,7 @@ import shortId from 'short-id';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { addContact, deleteContact } from 'store/actions/actions-contacts';
-// import { setFilter, resetFilter } from 'store/actions/actions-filter';
+import { setFilter, resetFilter } from 'store/actions/actions-filter';
 
 import Section from 'components/Section/Section';
 import { Header } from 'components/Header/Header';
@@ -18,9 +18,9 @@ const CONTACTS = 'contacts';
 
 function App() {
   const contacts = useSelector(state => state.contacts);
+  const filter = useSelector(state => state.filter);
   const dispatch = useDispatch();
 
-  const [filter, setFilter] = useState('');
   const [onlyBlockedRender, setOnlyBlockedRender] = useState(false);
 
   useEffect(() => {
@@ -66,7 +66,7 @@ function App() {
   };
 
   const filterSearchedContactsHandler = e => {
-    setFilter(e.currentTarget.value);
+    dispatch(setFilter({ value: e.currentTarget.value }));
     setOnlyBlockedRender(false);
   };
 
@@ -80,7 +80,7 @@ function App() {
   };
 
   const getVisibleContacts = () => {
-    if (filter) {
+    if (filter.length) {
       return renderSearchedContacts();
     } else {
       return onlyBlockedRender ? contacts.filter(el => el.isBlocked) : contacts;
@@ -107,9 +107,7 @@ function App() {
         >
           <Filter
             onSearch={filterSearchedContactsHandler}
-            onClearFilter={() => {
-              setFilter('');
-            }}
+            onClearFilter={() => dispatch(resetFilter())}
             onBlockedFilter={filterBlockedContacts}
             renderBlocked={onlyBlockedRender}
             searchValue={filter}
