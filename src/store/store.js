@@ -4,11 +4,11 @@ import { combineReducers } from 'redux';
 import { contactsReducer } from './reducers/reducers-contacts';
 import { filterReducer } from './reducers/reducers-filter';
 
-export const reducer = combineReducers({
+export const rootReducer = combineReducers({
   contacts: contactsReducer,
   filter: filterReducer,
 });
 
 export const store = configureStore({
-  reducer,
+  reducer: rootReducer,
 });

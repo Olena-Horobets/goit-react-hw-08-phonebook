@@ -4,8 +4,13 @@ import { useState, useEffect } from 'react';
 import shortId from 'short-id';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { addContact, deleteContact } from 'store/actions/actions-contacts';
+import {
+  addContact,
+  deleteContact,
+  toggleContactBlock,
+} from 'store/actions/actions-contacts';
 import { setFilter, resetFilter } from 'store/actions/actions-filter';
+import { CONTACTS } from 'utils/constants';
 
 import Section from 'components/Section/Section';
 import { Header } from 'components/Header/Header';
@@ -14,14 +19,13 @@ import { ContactsList } from 'components/ContactsList/ContactsList';
 import { Filter } from 'components/Filter/Filter';
 import { EmptyMessage } from 'components/EmptyMessage/EmptyMessage';
 
-const CONTACTS = 'contacts';
-
 function App() {
   const contacts = useSelector(state => state.contacts);
   const filter = useSelector(state => state.filter);
-  const dispatch = useDispatch();
 
   const [onlyBlockedRender, setOnlyBlockedRender] = useState(false);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     localStorage.setItem(CONTACTS, JSON.stringify(contacts));
@@ -52,17 +56,7 @@ function App() {
   };
 
   const blockContactHandler = id => {
-    //   setContacts(prev =>
-    //     prev.map(el => {
-    //       if (el.id === id) {
-    //         el = {
-    //           ...el,
-    //           isBlocked: !el.isBlocked,
-    //         };
-    //       }
-    //       return el;
-    //     }),
-    //   );
+    dispatch(toggleContactBlock({ id }));
   };
 
   const filterSearchedContactsHandler = e => {
