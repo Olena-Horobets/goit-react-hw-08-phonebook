@@ -3,6 +3,10 @@ import 'App.css';
 import { useState, useEffect } from 'react';
 import shortId from 'short-id';
 
+import { useSelector, useDispatch } from 'react-redux';
+import { addContact, deleteContact } from 'store/actions/actions-contacts';
+// import { setFilter, resetFilter } from 'store/actions/actions-filter';
+
 import Section from 'components/Section/Section';
 import { Header } from 'components/Header/Header';
 import { ContactForm } from 'components/ContactForm/ContactForm';
@@ -13,11 +17,9 @@ import { EmptyMessage } from 'components/EmptyMessage/EmptyMessage';
 const CONTACTS = 'contacts';
 
 function App() {
-  const [contacts, setContacts] = useState(() => {
-    return localStorage.getItem(CONTACTS)
-      ? JSON.parse(localStorage.getItem(CONTACTS))
-      : [];
-  });
+  const contacts = useSelector(state => state.contacts);
+  const dispatch = useDispatch();
+
   const [filter, setFilter] = useState('');
   const [onlyBlockedRender, setOnlyBlockedRender] = useState(false);
 
@@ -25,42 +27,42 @@ function App() {
     localStorage.setItem(CONTACTS, JSON.stringify(contacts));
   }, [contacts]);
 
-  const formSubmitHandler = data => {
-    data.id = shortId.generate();
-    data.isBlocked = false;
+  const formSubmitHandler = contact => {
+    contact.id = shortId.generate();
+    contact.isBlocked = false;
 
-    const savedContact = contacts.find(el => el.number === data.number);
+    const savedContact = contacts.find(el => el.number === contact.number);
     if (savedContact) {
       alert(`This number is already saved under "${savedContact.name}" name`);
     }
 
-    if (contacts.some(el => el.name === data.name)) {
+    if (contacts.some(el => el.name === contact.name)) {
       const newName = prompt(
         'This name is alreday used. Please, use different name',
       );
-      data.name = newName;
+      contact.name = newName;
     }
 
-    setContacts(prev => [...prev, data]);
+    dispatch(addContact({ contact }));
     setOnlyBlockedRender(false);
   };
 
   const deleteContactHandler = id => {
-    setContacts(prev => prev.filter(el => el.id !== id));
+    dispatch(deleteContact({ id }));
   };
 
   const blockContactHandler = id => {
-    setContacts(prev =>
-      prev.map(el => {
-        if (el.id === id) {
-          el = {
-            ...el,
-            isBlocked: !el.isBlocked,
-          };
-        }
-        return el;
-      }),
-    );
+    //   setContacts(prev =>
+    //     prev.map(el => {
+    //       if (el.id === id) {
+    //         el = {
+    //           ...el,
+    //           isBlocked: !el.isBlocked,
+    //         };
+    //       }
+    //       return el;
+    //     }),
+    //   );
   };
 
   const filterSearchedContactsHandler = e => {
