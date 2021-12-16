@@ -3,7 +3,7 @@ import s from 'components/ContactsList/ContactsList.module.css';
 import PropTypes from 'prop-types';
 import { ContactItem } from 'components/ContactItem/ContactItem';
 
-function ContactsList({ contacts, onDelete, onBlock }) {
+function ContactsList({ contacts, onBlock }) {
   return (
     <ul className={s.list}>
       {contacts.map(el => {
@@ -14,7 +14,6 @@ function ContactsList({ contacts, onDelete, onBlock }) {
             number={el.number}
             isBlocked={el.isBlocked}
             id={el.id}
-            onDelete={onDelete}
             onBlock={onBlock}
           />
         );
@@ -29,7 +28,6 @@ ContactsList.propTypes = {
       id: PropTypes.string.isRequired,
     }),
   ),
-  onDelete: PropTypes.func.isRequired,
   onBlock: PropTypes.func.isRequired,
 };
 

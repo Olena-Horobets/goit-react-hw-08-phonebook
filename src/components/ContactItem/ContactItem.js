@@ -4,13 +4,14 @@ import { useState } from 'react';
 import shortId from 'short-id';
 import PropTypes from 'prop-types';
 import { Button } from 'components/Button/Button';
+import { useDeleteContactMutation } from 'store/contsctsAPI';
 
 import classNames from 'classnames';
 import { ReactComponent as ReactSprite } from 'images/sprite.svg';
 
-function ContactItem({ name, number, id, isBlocked, onDelete, onBlock }) {
+function ContactItem({ name, number, id, isBlocked, onBlock }) {
   const [isHovered, setIsHovered] = useState(false);
-
+  const [deleteContact] = useDeleteContactMutation();
   const blockInputId = shortId.generate();
 
   return (
@@ -68,7 +69,7 @@ function ContactItem({ name, number, id, isBlocked, onDelete, onBlock }) {
           iconName={'icon-delete'}
           text="DELETE"
           onClick={() => {
-            onDelete(id);
+            deleteContact(id);
           }}
           disabled={false}
         />
@@ -82,7 +83,6 @@ ContactItem.propTypes = {
   number: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   isBlocked: PropTypes.bool.isRequired,
-  onDelete: PropTypes.func.isRequired,
   onBlock: PropTypes.func.isRequired,
 };
 
