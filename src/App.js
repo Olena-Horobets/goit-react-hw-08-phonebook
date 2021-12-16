@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import shortId from 'short-id';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { addContact, toggleContactBlock } from 'store/actions/actions-contacts';
+import { addContact } from 'store/actions/actions-contacts';
 import { setFilter, resetFilter } from 'store/actions/actions-filter';
 
 import { useGetContactsQuery } from 'store/contsctsAPI';
@@ -19,7 +19,7 @@ import { EmptyMessage } from 'components/EmptyMessage/EmptyMessage';
 function App() {
   const filter = useSelector(state => state.filter);
   const { data: contacts } = useGetContactsQuery();
-
+  console.log(contacts);
   const [onlyBlockedRender, setOnlyBlockedRender] = useState(false);
 
   const dispatch = useDispatch();
@@ -42,10 +42,6 @@ function App() {
 
     dispatch(addContact({ contact }));
     setOnlyBlockedRender(false);
-  };
-
-  const blockContactHandler = id => {
-    dispatch(toggleContactBlock({ id }));
   };
 
   const filterSearchedContactsHandler = e => {
@@ -99,10 +95,7 @@ function App() {
             btnClass={filter ? 'filterBtnEmerged' : 'filterBtn'}
           />
           {contactList?.length ? (
-            <ContactsList
-              contacts={contactList}
-              onBlock={blockContactHandler}
-            />
+            <ContactsList contacts={contactList} />
           ) : (
             <EmptyMessage message="Nothing found" />
           )}

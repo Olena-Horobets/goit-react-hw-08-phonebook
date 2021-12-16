@@ -4,16 +4,23 @@ import { useState } from 'react';
 import shortId from 'short-id';
 import PropTypes from 'prop-types';
 import { Button } from 'components/Button/Button';
-import { useDeleteContactMutation } from 'store/contsctsAPI';
+import {
+  useDeleteContactMutation,
+  useBlockContactToggleMutation,
+} from 'store/contsctsAPI';
 
 import classNames from 'classnames';
 import { ReactComponent as ReactSprite } from 'images/sprite.svg';
 
-function ContactItem({ name, number, id, isBlocked, onBlock }) {
+function ContactItem({ name, number, id, isBlocked }) {
   const [isHovered, setIsHovered] = useState(false);
   const [deleteContact] = useDeleteContactMutation();
+  const [blockContact] = useBlockContactToggleMutation();
   const blockInputId = shortId.generate();
 
+  const blockContactHandler = (id, isBlocked) => {
+    blockContact({ id, contact: { isBlocked: !isBlocked } });
+  };
   return (
     <li
       className={s[isBlocked ? 'itemBlocked' : 'item']}
@@ -50,9 +57,7 @@ function ContactItem({ name, number, id, isBlocked, onBlock }) {
             id={blockInputId}
             className={s.blockContactCheckbox}
             type="checkbox"
-            onChange={() => {
-              onBlock(id);
-            }}
+            onChange={() => blockContactHandler(id, isBlocked)}
             checked={isBlocked}
           />
           <svg className={s.checkIcon}>
@@ -68,9 +73,7 @@ function ContactItem({ name, number, id, isBlocked, onBlock }) {
           iconClass={'deleteIcon'}
           iconName={'icon-delete'}
           text="DELETE"
-          onClick={() => {
-            deleteContact(id);
-          }}
+          onClick={() => deleteContact(id)}
           disabled={false}
         />
       </div>
@@ -83,7 +86,6 @@ ContactItem.propTypes = {
   number: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   isBlocked: PropTypes.bool.isRequired,
-  onBlock: PropTypes.func.isRequired,
 };
 
 export { ContactItem };
