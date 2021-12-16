@@ -44,7 +44,7 @@ function ContactForm({ onSubmit }) {
           onChange={handleChange}
           className={s.input}
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-          title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
+          title="Name can only consist of letters, spaces and apostrophies, such as Jacob Mercer, Charles de Batz, d'Artagnan, etc"
           autoComplete="off"
           required
         />
@@ -60,7 +60,7 @@ function ContactForm({ onSubmit }) {
             onChange={handleChange}
             className={s.input}
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-            title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
+            title="Phone number can only consist of numbers, spaces, dashes, parentheses and can also start with +"
             autoComplete="off"
             required
           />

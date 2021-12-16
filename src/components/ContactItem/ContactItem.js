@@ -14,13 +14,16 @@ import { ReactComponent as ReactSprite } from 'images/sprite.svg';
 
 function ContactItem({ name, number, id, isBlocked }) {
   const [isHovered, setIsHovered] = useState(false);
+
   const [deleteContact] = useDeleteContactMutation();
   const [blockContact] = useBlockContactToggleMutation();
+
   const blockInputId = shortId.generate();
 
   const blockContactHandler = (id, isBlocked) => {
     blockContact({ id, contact: { isBlocked: !isBlocked } });
   };
+
   return (
     <li
       className={s[isBlocked ? 'itemBlocked' : 'item']}

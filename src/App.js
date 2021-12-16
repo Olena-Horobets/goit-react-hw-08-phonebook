@@ -46,10 +46,6 @@ function App() {
     setOnlyBlockedRender(false);
   };
 
-  const filterBlockedContacts = e => {
-    setOnlyBlockedRender(prev => !prev);
-  };
-
   const renderSearchedContacts = () => {
     const searchValue = filter.toLocaleLowerCase();
     return contacts?.filter(el => el.name.toLowerCase().includes(searchValue));
@@ -86,7 +82,7 @@ function App() {
           <Filter
             onSearch={filterSearchedContactsHandler}
             onClearFilter={() => dispatch(resetFilter())}
-            onBlockedFilter={filterBlockedContacts}
+            onBlockedFilter={() => setOnlyBlockedRender(prev => !prev)}
             renderBlocked={onlyBlockedRender}
             searchValue={filter}
             btnClass={filter ? 'filterBtnEmerged' : 'filterBtn'}
