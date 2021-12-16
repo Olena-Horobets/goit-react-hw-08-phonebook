@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { setFilter, resetFilter } from '../actions/actions-filter';
+import { setFilter, resetFilter } from './action-filter';
 
 const initialFilter = '';
 

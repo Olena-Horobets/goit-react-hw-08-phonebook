@@ -1,13 +1,11 @@
 import 'App.css';
 
-import { useState, useEffect } from 'react';
-import shortId from 'short-id';
+import { useState } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { addContact } from 'store/actions/actions-contacts';
-import { setFilter, resetFilter } from 'store/actions/actions-filter';
+import { setFilter, resetFilter } from 'store/filter/action-filter';
 
-import { useGetContactsQuery } from 'store/contsctsAPI';
+import { useGetContactsQuery, useAddContactMutation } from 'store/contsctsAPI';
 
 import Section from 'components/Section/Section';
 import { Header } from 'components/Header/Header';
@@ -17,17 +15,16 @@ import { Filter } from 'components/Filter/Filter';
 import { EmptyMessage } from 'components/EmptyMessage/EmptyMessage';
 
 function App() {
-  const filter = useSelector(state => state.filter);
   const { data: contacts } = useGetContactsQuery();
-  console.log(contacts);
+  const [addContact] = useAddContactMutation();
+
+  const filter = useSelector(state => state.filter);
+
   const [onlyBlockedRender, setOnlyBlockedRender] = useState(false);
 
   const dispatch = useDispatch();
 
   const formSubmitHandler = contact => {
-    contact.id = shortId.generate();
-    contact.isBlocked = false;
-
     const savedContact = contacts?.find(el => el.number === contact.number);
     if (savedContact) {
       alert(`This number is already saved under "${savedContact.name}" name`);
@@ -40,7 +37,7 @@ function App() {
       contact.name = newName;
     }
 
-    dispatch(addContact({ contact }));
+    addContact({ contact });
     setOnlyBlockedRender(false);
   };
 
