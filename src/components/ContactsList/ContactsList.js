@@ -6,6 +6,8 @@ import { ContactItem } from 'components/ContactItem/ContactItem';
 
 function ContactsList({ contacts }) {
   const [sortedContacts, setsortedContacts] = useState([]);
+  const [firstLettersArr, setFirstLettersArr] = useState([]);
+  const [subListsArr, setSubListsArr] = useState([]);
 
   useEffect(() => {
     const makeSortedContacts = () => {
@@ -19,19 +21,50 @@ function ContactsList({ contacts }) {
     setsortedContacts(makeSortedContacts());
   }, [contacts]);
 
+  useEffect(() => {
+    if (sortedContacts.length) {
+      let letters = [];
+      let arrs = [];
+
+      sortedContacts.reduce((acc, el, idx, arr) => {
+        const firstLetter = el.name[0].toUpperCase();
+
+        if (!letters.includes(firstLetter)) {
+          letters.push(firstLetter);
+          if (idx !== 0) arrs.push(acc);
+          acc = [el];
+        } else {
+          acc.push(el);
+        }
+
+        if (idx === arr.length - 1) arrs.push(acc);
+        return acc;
+      }, []);
+
+      setFirstLettersArr([...letters]);
+      setSubListsArr([...arrs]);
+    }
+  }, [sortedContacts]);
+
   return (
     <ul className={s.list}>
-      {sortedContacts.map(el => {
-        return (
-          <ContactItem
-            key={el.id}
-            name={el.name}
-            number={el.number}
-            isBlocked={el.isBlocked}
-            id={el.id}
-          />
-        );
-      })}
+      {firstLettersArr.map((el, idx) => (
+        <li className={s.item} key={idx}>
+          <span className={s.accentLetter}>{el}</span>
+
+          <ul className={s.subList}>
+            {subListsArr[idx].map(contact => (
+              <ContactItem
+                key={contact.id}
+                name={contact.name}
+                number={contact.number}
+                isBlocked={contact.isBlocked}
+                id={contact.id}
+              />
+            ))}
+          </ul>
+        </li>
+      ))}
     </ul>
   );
 }
