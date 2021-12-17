@@ -33,7 +33,10 @@ function ContactForm({ onSubmit }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className={s.form}>
+    <form
+      onSubmit={handleSubmit}
+      className={!contactName ? s.form : s.higherForm}
+    >
       <label htmlFor={nameInputId} className={s.label}>
         Name
         <input

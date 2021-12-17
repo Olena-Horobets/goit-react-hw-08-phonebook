@@ -35,3 +35,15 @@ h2,
 p {
   margin: 0;
 }
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--darker-bgr-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent-color);
+}

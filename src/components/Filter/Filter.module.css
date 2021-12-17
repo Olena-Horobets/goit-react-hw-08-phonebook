@@ -50,6 +50,8 @@
   font-weight: 600;
   font-size: 16px;
   border-radius: 4px;
+  cursor: pointer;
+
   transition: transform 150ms ease-out 300ms;
 }
 
@@ -69,6 +71,7 @@
   font-weight: 700;
   font-size: 18px;
   color: rgba(63, 150, 153, 0.493);
+  cursor: pointer;
 }
 
 .renderLabel:not(:last-child) {
