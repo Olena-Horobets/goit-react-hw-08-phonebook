@@ -1,10 +1,12 @@
 import 'App.css';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import { useState } from 'react';
-
 import { useSelector, useDispatch } from 'react-redux';
-import { setFilter, resetFilter } from 'store/filter/action-filter';
 
+import { setFilter, resetFilter } from 'store/filter/action-filter';
 import { useGetContactsQuery, useAddContactMutation } from 'store/contsctsAPI';
 
 import Section from 'components/Section/Section';
@@ -26,8 +28,12 @@ function App() {
 
   const formSubmitHandler = contact => {
     const savedContact = contacts?.find(el => el.number === contact.number);
+
     if (savedContact) {
-      alert(`This number is already saved under "${savedContact.name}" name`);
+      toast.error(
+        `This number is already saved under "${savedContact.name.toUpperCase()}" name`,
+      );
+      return;
     }
 
     if (contacts?.some(el => el.name === contact.name)) {
@@ -39,6 +45,9 @@ function App() {
 
     addContact({ contact });
     setOnlyBlockedRender(false);
+    toast.success(
+      `Contact "${contact.name.toUpperCase()}" added to your list successfully!`,
+    );
   };
 
   const filterSearchedContactsHandler = e => {
@@ -64,6 +73,7 @@ function App() {
   const contactList = getVisibleContacts();
   return (
     <div className="App">
+      <ToastContainer theme="light" icon={true} limit={1} />
       <Header />
       <div className="container">
         <Section
