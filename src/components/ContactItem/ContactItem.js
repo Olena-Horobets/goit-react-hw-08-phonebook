@@ -12,11 +12,14 @@ import {
 import classNames from 'classnames';
 import { ReactComponent as ReactSprite } from 'images/sprite.svg';
 
+import Loader from 'components/Loader/Loader';
+
 function ContactItem({ name, number, id, isBlocked }) {
   const [isHovered, setIsHovered] = useState(false);
 
-  const [deleteContact] = useDeleteContactMutation();
-  const [blockContact] = useBlockContactToggleMutation();
+  const [deleteContact, { isLoading }] = useDeleteContactMutation();
+  const [blockContact, { isLoading: isBlocking }] =
+    useBlockContactToggleMutation();
 
   const blockInputId = shortId.generate();
 
@@ -34,6 +37,9 @@ function ContactItem({ name, number, id, isBlocked }) {
         setIsHovered(false);
       }}
     >
+      {isLoading || isBlocking ? (
+        <Loader size={30} color={'rgba(1, 107, 110, 0.3)'} />
+      ) : null}
       <ReactSprite />
       <div className={s.itemInfo}>
         <span className={s.itemName}>

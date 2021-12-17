@@ -15,9 +15,10 @@ import { ContactForm } from 'components/ContactForm/ContactForm';
 import { ContactsList } from 'components/ContactsList/ContactsList';
 import { Filter } from 'components/Filter/Filter';
 import { EmptyMessage } from 'components/EmptyMessage/EmptyMessage';
+import Loader from 'components/Loader/Loader';
 
 function App() {
-  const { data: contacts } = useGetContactsQuery();
+  const { data: contacts, isFetching } = useGetContactsQuery();
   const [addContact] = useAddContactMutation();
 
   const filter = useSelector(state => state.filter);
@@ -99,6 +100,8 @@ function App() {
           />
           {contactList?.length ? (
             <ContactsList contacts={contactList} />
+          ) : isFetching ? (
+            <Loader size={60} color={'rgba(252, 0, 0, 0.3)'} />
           ) : (
             <EmptyMessage message="Nothing found" />
           )}
