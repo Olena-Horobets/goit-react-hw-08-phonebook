@@ -1,0 +1,32 @@
+.nav {
+  display: flex;
+  flex-direction: column;
+  width: 50px;
+}
+
+.link {
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--white-color);
+  color: var(--darker-bgr-color);
+}
+
+.link:not(:last-child) {
+  margin-bottom: 15px;
+}
+
+.activeLink {
+  composes: link;
+  background-color: var(--accent-color);
+  color: var(--white-color);
+}
+
+.icon {
+  width: 30px;
+  height: 30px;
+  fill: currentColor;
+}
