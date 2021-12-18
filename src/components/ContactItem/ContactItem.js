@@ -1,18 +1,18 @@
 import s from 'components/ContactItem/ContactItem.module.css';
+import classNames from 'classnames';
+import { ReactComponent as ReactSprite } from 'images/sprite.svg';
 
 import { useState } from 'react';
 import shortId from 'short-id';
 import PropTypes from 'prop-types';
-import { Button } from 'components/Button/Button';
+
 import {
   useDeleteContactMutation,
   useBlockContactToggleMutation,
 } from 'store/contsctsAPI';
 
-import classNames from 'classnames';
-import { ReactComponent as ReactSprite } from 'images/sprite.svg';
-
-import Loader from 'components/Loader/Loader';
+import { Button } from 'components/Button/Button';
+import { Loader } from 'components/Loader/Loader';
 
 function ContactItem({ name, number, id, isBlocked }) {
   const [isHovered, setIsHovered] = useState(false);

@@ -1,18 +1,14 @@
 import s from 'components/Filter/Filter.module.css';
+import { ReactComponent as ReactSprite } from 'images/sprite.svg';
 
 import shortId from 'short-id';
 import PropTypes from 'prop-types';
 
-import { ReactComponent as ReactSprite } from 'images/sprite.svg';
+import { useSelector } from 'react-redux';
 
-function Filter({
-  onSearch,
-  onClearFilter,
-  searchValue,
-  btnClass,
-  onBlockedFilter,
-  renderBlocked,
-}) {
+function Filter({ onSearch, onClearFilter, onBlockedFilter, renderBlocked }) {
+  const filter = useSelector(state => state.filter);
+
   const radioInpAllId = shortId.generate();
   const radioInpBlockedId = shortId.generate();
 
@@ -62,11 +58,14 @@ function Filter({
           className={s.filterInput}
           name="filter"
           type="text"
-          value={searchValue}
+          value={filter}
           onChange={onSearch}
           autoComplete="off"
         ></input>
-        <button className={s[btnClass]} onClick={onClearFilter}>
+        <button
+          className={filter ? s.filterBtnEmerged : s.filterBtn}
+          onClick={onClearFilter}
+        >
           {' '}
           X{' '}
         </button>
@@ -78,8 +77,6 @@ function Filter({
 Filter.propTypes = {
   onSearch: PropTypes.func.isRequired,
   onClearFilter: PropTypes.func.isRequired,
-  searchValue: PropTypes.string.isRequired,
-  btnClass: PropTypes.string.isRequired,
   onBlockedFilter: PropTypes.func.isRequired,
   renderBlocked: PropTypes.bool.isRequired,
 };

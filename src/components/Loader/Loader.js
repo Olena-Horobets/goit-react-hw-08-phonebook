@@ -19,4 +19,4 @@ Loader.protoTypes = {
   size: PropTypes.number.isRequired,
 };
 
-export default Loader;
+export { Loader };

@@ -26,4 +26,4 @@ Section.protoTypes = {
   iconName: PropTypes.string,
 };
 
-export default Section;
+export { Section };

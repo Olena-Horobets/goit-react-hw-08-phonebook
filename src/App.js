@@ -4,26 +4,24 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { setFilter, resetFilter } from 'store/filter/action-filter';
-import { useGetContactsQuery, useAddContactMutation } from 'store/contsctsAPI';
+import { useAddContactMutation } from 'store/contsctsAPI';
+import { GetVisibleContacts } from 'services/getVisibleContacts';
 
-import Section from 'components/Section/Section';
+import { Section } from 'components/Section/Section';
 import { Header } from 'components/Header/Header';
 import { ContactForm } from 'components/ContactForm/ContactForm';
 import { ContactsList } from 'components/ContactsList/ContactsList';
 import { Filter } from 'components/Filter/Filter';
 import { EmptyMessage } from 'components/EmptyMessage/EmptyMessage';
-import Loader from 'components/Loader/Loader';
+import { Loader } from 'components/Loader/Loader';
 
 function App() {
-  const { data: contacts, isFetching } = useGetContactsQuery();
   const [addContact] = useAddContactMutation();
-
-  const filter = useSelector(state => state.filter);
-
   const [onlyBlockedRender, setOnlyBlockedRender] = useState(false);
+  const { contacts, isLoading } = GetVisibleContacts({ onlyBlockedRender });
 
   const dispatch = useDispatch();
 
@@ -56,22 +54,6 @@ function App() {
     setOnlyBlockedRender(false);
   };
 
-  const renderSearchedContacts = () => {
-    const searchValue = filter.toLocaleLowerCase();
-    return contacts?.filter(el => el.name.toLowerCase().includes(searchValue));
-  };
-
-  const getVisibleContacts = () => {
-    if (filter?.length) {
-      return renderSearchedContacts();
-    } else {
-      return onlyBlockedRender
-        ? contacts?.filter(el => el.isBlocked)
-        : contacts;
-    }
-  };
-
-  const contactList = getVisibleContacts();
   return (
     <div className="App">
       <ToastContainer theme="light" icon={true} limit={1} />
@@ -95,12 +77,10 @@ function App() {
             onClearFilter={() => dispatch(resetFilter())}
             onBlockedFilter={() => setOnlyBlockedRender(prev => !prev)}
             renderBlocked={onlyBlockedRender}
-            searchValue={filter}
-            btnClass={filter ? 'filterBtnEmerged' : 'filterBtn'}
           />
-          {contactList?.length ? (
-            <ContactsList contacts={contactList} />
-          ) : isFetching ? (
+          {contacts?.length ? (
+            <ContactsList contacts={contacts} />
+          ) : isLoading ? (
             <Loader size={60} color={'rgba(252, 0, 0, 0.3)'} />
           ) : (
             <EmptyMessage message="Nothing found" />
