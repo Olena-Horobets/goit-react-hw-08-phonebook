@@ -3,10 +3,9 @@ import 'App.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { setFilter, resetFilter } from 'store/filter/action-filter';
+import { resetBlockedRender } from 'store/blockedRender/action-blockedRender';
 import { useAddContactMutation } from 'store/contsctsAPI';
 import { GetVisibleContacts } from 'services/getVisibleContacts';
 
@@ -20,8 +19,8 @@ import { Loader } from 'components/Loader/Loader';
 
 function App() {
   const [addContact] = useAddContactMutation();
-  const [onlyBlockedRender, setOnlyBlockedRender] = useState(false);
-  const { contacts, isLoading } = GetVisibleContacts({ onlyBlockedRender });
+
+  const { contacts, isLoading } = GetVisibleContacts();
 
   const dispatch = useDispatch();
 
@@ -43,15 +42,10 @@ function App() {
     }
 
     addContact({ contact });
-    setOnlyBlockedRender(false);
+    dispatch(resetBlockedRender());
     toast.success(
       `Contact "${contact.name.toUpperCase()}" added to your list successfully!`,
     );
-  };
-
-  const filterSearchedContactsHandler = e => {
-    dispatch(setFilter({ value: e.currentTarget.value }));
-    setOnlyBlockedRender(false);
   };
 
   return (
@@ -72,12 +66,7 @@ function App() {
           title="Contacts"
           iconName={'icon-contacts'}
         >
-          <Filter
-            onSearch={filterSearchedContactsHandler}
-            onClearFilter={() => dispatch(resetFilter())}
-            onBlockedFilter={() => setOnlyBlockedRender(prev => !prev)}
-            renderBlocked={onlyBlockedRender}
-          />
+          <Filter />
           {contacts?.length ? (
             <ContactsList contacts={contacts} />
           ) : isLoading ? (

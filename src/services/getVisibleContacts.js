@@ -2,10 +2,11 @@ import { useSelector } from 'react-redux';
 
 import { useGetContactsQuery } from 'store/contsctsAPI';
 
-function GetVisibleContacts({ renderBlocked }) {
+function GetVisibleContacts() {
   const { data: contacts, isFetching } = useGetContactsQuery();
 
   const filter = useSelector(state => state.filter);
+  const blockedRender = useSelector(state => state.blockedRender);
 
   const renderSearchedContacts = () => {
     const searchValue = filter.toLocaleLowerCase();
@@ -16,7 +17,7 @@ function GetVisibleContacts({ renderBlocked }) {
     if (filter?.length) {
       return renderSearchedContacts();
     } else {
-      return renderBlocked ? contacts?.filter(el => el.isBlocked) : contacts;
+      return blockedRender ? contacts?.filter(el => el.isBlocked) : contacts;
     }
   };
 

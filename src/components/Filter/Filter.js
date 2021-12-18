@@ -2,15 +2,29 @@ import s from 'components/Filter/Filter.module.css';
 import { ReactComponent as ReactSprite } from 'images/sprite.svg';
 
 import shortId from 'short-id';
-import PropTypes from 'prop-types';
 
 import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
-function Filter({ onSearch, onClearFilter, onBlockedFilter, renderBlocked }) {
+import { setFilter, resetFilter } from 'store/filter/action-filter';
+import {
+  resetBlockedRender,
+  toggleBlockedRender,
+} from 'store/blockedRender/action-blockedRender';
+
+function Filter() {
   const filter = useSelector(state => state.filter);
+  const blockedRender = useSelector(state => state.blockedRender);
+
+  const dispatch = useDispatch();
 
   const radioInpAllId = shortId.generate();
   const radioInpBlockedId = shortId.generate();
+
+  const filterSearchedContactsHandler = e => {
+    dispatch(setFilter({ value: e.currentTarget.value }));
+    dispatch(resetBlockedRender());
+  };
 
   return (
     <div className={s.wrapper}>
@@ -18,7 +32,7 @@ function Filter({ onSearch, onClearFilter, onBlockedFilter, renderBlocked }) {
       <div className={s.renderFilter}>
         <label
           htmlFor={radioInpAllId}
-          className={s[renderBlocked ? 'renderLabel' : 'renderLabelChecked']}
+          className={s[blockedRender ? 'renderLabel' : 'renderLabelChecked']}
         >
           All
           <input
@@ -27,14 +41,14 @@ function Filter({ onSearch, onClearFilter, onBlockedFilter, renderBlocked }) {
             className={s.radioInput}
             value="all"
             type="radio"
-            checked={!renderBlocked}
-            onChange={onBlockedFilter}
+            checked={!blockedRender}
+            onChange={() => dispatch(toggleBlockedRender())}
           ></input>
           <span className={s.renderList}></span>
         </label>
         <label
           htmlFor={radioInpBlockedId}
-          className={s[renderBlocked ? 'renderLabelChecked' : 'renderLabel']}
+          className={s[blockedRender ? 'renderLabelChecked' : 'renderLabel']}
         >
           Blocked
           <input
@@ -43,8 +57,8 @@ function Filter({ onSearch, onClearFilter, onBlockedFilter, renderBlocked }) {
             className={s.radioInput}
             value="blocked"
             type="radio"
-            checked={renderBlocked}
-            onChange={onBlockedFilter}
+            checked={blockedRender}
+            onChange={() => dispatch(toggleBlockedRender())}
           ></input>
           <span className={s.renderList}></span>
         </label>
@@ -59,12 +73,12 @@ function Filter({ onSearch, onClearFilter, onBlockedFilter, renderBlocked }) {
           name="filter"
           type="text"
           value={filter}
-          onChange={onSearch}
+          onChange={filterSearchedContactsHandler}
           autoComplete="off"
         ></input>
         <button
           className={filter ? s.filterBtnEmerged : s.filterBtn}
-          onClick={onClearFilter}
+          onClick={() => dispatch(resetFilter())}
         >
           {' '}
           X{' '}
@@ -73,12 +87,5 @@ function Filter({ onSearch, onClearFilter, onBlockedFilter, renderBlocked }) {
     </div>
   );
 }
-
-Filter.propTypes = {
-  onSearch: PropTypes.func.isRequired,
-  onClearFilter: PropTypes.func.isRequired,
-  onBlockedFilter: PropTypes.func.isRequired,
-  renderBlocked: PropTypes.bool.isRequired,
-};
 
 export { Filter };
