@@ -23,6 +23,7 @@ body {
   background-color: var(--primary-bgr-color);
   color: var(--main-txt-color);
   line-height: 1;
+  cursor: default;
 }
 
 code {

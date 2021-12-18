@@ -94,3 +94,35 @@
   margin-left: 2px;
   fill: currentColor;
 }
+
+/* deleted items btn */
+.binItemBtn {
+  font-weight: 400;
+  background-color: var(--accent-color);
+  color: var(--white-color);
+  display: flex;
+  padding: 2px 8px;
+  justify-content: space-between;
+}
+
+.binItemBtn:not(:last-child) {
+  margin-bottom: 6px;
+}
+
+.binIcon {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+.deleteForever {
+  background-color: rgba(252, 0, 0, 0.514);
+}
+
+.binItemBtn:hover {
+  background-color: rgba(252, 0, 0, 0.705);
+}
+
+.binItemBtn:active {
+  background-color: rgba(14, 32, 194, 0.726);
+}

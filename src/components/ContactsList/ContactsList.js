@@ -17,13 +17,14 @@ function ContactsList({ contacts }) {
 
           <ul className={s.subList}>
             {subListsArr[idx].map(contact => (
-              <ContactItem
-                key={contact.id}
-                name={contact.name}
-                number={contact.number}
-                isBlocked={contact.isBlocked}
-                id={contact.id}
-              />
+              <li className={s.subItem} key={contact.id}>
+                <ContactItem
+                  name={contact.name}
+                  number={contact.number}
+                  isBlocked={contact.isBlocked}
+                  id={contact.id}
+                />
+              </li>
             ))}
           </ul>
         </li>

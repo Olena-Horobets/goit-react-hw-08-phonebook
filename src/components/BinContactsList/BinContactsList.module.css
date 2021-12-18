@@ -1,0 +1,55 @@
+.list {
+  width: 100%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.item {
+  position: relative;
+  display: flex;
+  padding: 6px 18px;
+  align-items: center;
+  justify-content: flex-start;
+
+  border-radius: 4px;
+  box-shadow: var(--outer-shadow);
+  background-color: var(--white-color);
+  letter-spacing: 0.5px;
+
+  opacity: 0.8;
+}
+
+.item:not(:last-child) {
+  margin-bottom: 15px;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 6px;
+  align-self: start;
+  fill: currentColor;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+}
+
+.name {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.number {
+  font-size: 16px;
+  font-weight: 400;
+}
+.controls {
+  display: flex;
+  flex-direction: column;
+
+  margin-left: auto;
+}

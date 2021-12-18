@@ -2,6 +2,7 @@
   padding: 0;
   margin: 0;
   list-style: none;
+  width: 100%;
 
   display: flex;
   flex-direction: column;
@@ -19,6 +20,7 @@
   composes: list;
   position: relative;
   padding: 30px 0 0;
+  align-items: flex-end;
 }
 
 .subList::before {
@@ -28,7 +30,7 @@
   content: '';
   display: block;
   height: 3px;
-  width: 115%;
+  width: 100%;
   background-color: var(--accent-color);
   opacity: 0.6;
   border-radius: 2px;
@@ -36,10 +38,18 @@
     2px 2px 4px rgba(0, 0, 0, 0.322), 1px 1px 2px rgba(0, 0, 0, 0.445);
 }
 
+.subItem {
+  width: 85%;
+}
+
+.subItem:not(:last-child) {
+  margin-bottom: 16px;
+}
+
 .accentLetter {
   position: absolute;
   top: 30px;
-  left: -50px;
+  left: 0px;
   font-size: 32px;
   font-weight: 700;
   color: var(--accent-color);

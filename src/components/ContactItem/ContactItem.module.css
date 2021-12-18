@@ -9,8 +9,6 @@
   border-radius: 4px;
   box-shadow: var(--outer-shadow);
   background-color: var(--white-color);
-  cursor: pointer;
-
   transition: background-color var(--main-animation),
     color var(--main-animation);
 }
@@ -26,10 +24,6 @@
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
-}
-
-.item:not(:last-child) {
-  margin-bottom: 16px;
 }
 
 .itemIcon {

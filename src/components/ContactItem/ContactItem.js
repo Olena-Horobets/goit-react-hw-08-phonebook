@@ -2,14 +2,15 @@ import s from 'components/ContactItem/ContactItem.module.css';
 import classNames from 'classnames';
 import { ReactComponent as ReactSprite } from 'images/sprite.svg';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import shortId from 'short-id';
 import PropTypes from 'prop-types';
 
 import {
   useDeleteContactMutation,
   useBlockContactToggleMutation,
-} from 'store/contsctsAPI';
+} from 'store/contacts/contsctsAPI';
+import { useAddBinContactMutation } from 'store/bin/binAPI';
 
 import { Button } from 'components/Button/Button';
 import { Loader } from 'components/Loader/Loader';
@@ -17,18 +18,25 @@ import { Loader } from 'components/Loader/Loader';
 function ContactItem({ name, number, id, isBlocked }) {
   const [isHovered, setIsHovered] = useState(false);
 
-  const [deleteContact, { isLoading }] = useDeleteContactMutation();
+  const [deleteContact, { data, isLoading }] = useDeleteContactMutation();
+  const [addToBin] = useAddBinContactMutation();
   const [blockContact, { isLoading: isBlocking }] =
     useBlockContactToggleMutation();
 
   const blockInputId = shortId.generate();
+
+  useEffect(() => {
+    if (!data) return;
+    addToBin({ contact: data });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
 
   const blockContactHandler = (id, isBlocked) => {
     blockContact({ id, contact: { isBlocked: !isBlocked } });
   };
 
   return (
-    <li
+    <div
       className={s[isBlocked ? 'itemBlocked' : 'item']}
       onMouseOver={() => {
         setIsHovered(true);
@@ -81,12 +89,12 @@ function ContactItem({ name, number, id, isBlocked }) {
           })}
           iconClass={'deleteIcon'}
           iconName={'icon-delete'}
-          text="DELETE"
+          text="Move to trash"
           onClick={() => deleteContact(id)}
           disabled={false}
         />
       </div>
-    </li>
+    </div>
   );
 }
 

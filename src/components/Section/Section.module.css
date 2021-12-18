@@ -1,15 +1,22 @@
 .section {
   padding: 0;
+  position: relative;
+  min-height: 100vh;
 }
 
 .newContact {
   composes: section;
 }
 
+.deleted {
+  composes: section;
+  width: 420px;
+}
+
 .contacts {
   composes: section;
   width: 100%;
-  max-width: 420px;
+  max-width: 440px;
 }
 
 .title {
@@ -29,7 +36,7 @@
 
 @media screen and (min-width: 1000px) {
   .section {
-    padding: 0 20px;
+    padding: 0 10px;
   }
 
   .contacts {
