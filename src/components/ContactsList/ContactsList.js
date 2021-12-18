@@ -1,50 +1,13 @@
 import s from 'components/ContactsList/ContactsList.module.css';
 
-import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+
 import { ContactItem } from 'components/ContactItem/ContactItem';
 
+import { getContactsSublists } from 'services/getContactsSublists';
+
 function ContactsList({ contacts }) {
-  const [sortedContacts, setsortedContacts] = useState([]);
-  const [firstLettersArr, setFirstLettersArr] = useState([]);
-  const [subListsArr, setSubListsArr] = useState([]);
-
-  useEffect(() => {
-    const makeSortedContacts = () => {
-      return [...contacts].sort((x, y) => {
-        let a = x.name.toUpperCase(),
-          b = y.name.toUpperCase();
-        return a === b ? 0 : a > b ? 1 : -1;
-      });
-    };
-
-    setsortedContacts(makeSortedContacts());
-  }, [contacts]);
-
-  useEffect(() => {
-    if (sortedContacts.length) {
-      let letters = [];
-      let arrs = [];
-
-      sortedContacts.reduce((acc, el, idx, arr) => {
-        const firstLetter = el.name[0].toUpperCase();
-
-        if (!letters.includes(firstLetter)) {
-          letters.push(firstLetter);
-          if (idx !== 0) arrs.push(acc);
-          acc = [el];
-        } else {
-          acc.push(el);
-        }
-
-        if (idx === arr.length - 1) arrs.push(acc);
-        return acc;
-      }, []);
-
-      setFirstLettersArr([...letters]);
-      setSubListsArr([...arrs]);
-    }
-  }, [sortedContacts]);
+  const { firstLettersArr, subListsArr } = getContactsSublists(contacts);
 
   return (
     <ul className={s.list}>
