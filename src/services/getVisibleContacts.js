@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 
-import { useGetContactsQuery } from 'store/contsctsAPI';
+import { useGetContactsQuery } from 'store/contacts/contsctsAPI';
 
 function GetVisibleContacts() {
   const { data: contacts, isFetching } = useGetContactsQuery();

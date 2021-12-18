@@ -3,12 +3,14 @@ import { combineReducers } from 'redux';
 
 import { filterReducer } from './filter/reducer-filter';
 import { blockedRenderReducer } from 'store/blockedRender/reducer-blockedRender';
-import { contactsAPI } from 'store/contsctsAPI';
+import { contactsAPI } from 'store/contacts/contsctsAPI';
+import { binAPI } from './bin/binAPI';
 
 export const rootReducer = combineReducers({
   filter: filterReducer,
   blockedRender: blockedRenderReducer,
   [contactsAPI.reducerPath]: contactsAPI.reducer,
+  [binAPI.reducerPath]: binAPI.reducer,
 });
 
 export const store = configureStore({
@@ -16,5 +18,6 @@ export const store = configureStore({
   middleware: getDefaultMiddleware => [
     ...getDefaultMiddleware(),
     contactsAPI.middleware,
+    binAPI.middleware,
   ],
 });

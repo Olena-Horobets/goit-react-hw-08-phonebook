@@ -1,4 +1,3 @@
-import shortId from 'short-id';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const contactsAPI = createApi({
@@ -31,7 +30,7 @@ export const contactsAPI = createApi({
       query: ({ contact }) => ({
         url: `/contacts`,
         method: 'POST',
-        body: { ...contact, id: shortId.generate(), isBlocked: false },
+        body: { ...contact, isBlocked: false },
       }),
       invalidatesTags: ['Contacts'],
     }),
