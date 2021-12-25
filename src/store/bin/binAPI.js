@@ -29,8 +29,8 @@ export const binAPI = createApi({
   }),
 });
 
-export const {
-  useGetBinContactsQuery,
-  useAddBinContactMutation,
-  useDeleteBinContactMutation,
-} = binAPI;
+// export const {
+//   useGetBinContactsQuery,
+//   useAddBinContactMutation,
+//   useDeleteBinContactMutation,
+// } = binAPI;

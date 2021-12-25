@@ -3,7 +3,6 @@ import s from 'components/ContactsList/ContactsList.module.css';
 import PropTypes from 'prop-types';
 
 import { ContactItem } from 'components/ContactItem/ContactItem';
-
 import { getContactsSublists } from 'services/getContactsSublists';
 
 function ContactsList({ contacts }) {
@@ -21,7 +20,6 @@ function ContactsList({ contacts }) {
                 <ContactItem
                   name={contact.name}
                   number={contact.number}
-                  isBlocked={contact.isBlocked}
                   id={contact.id}
                 />
               </li>

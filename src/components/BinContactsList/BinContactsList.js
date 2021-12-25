@@ -3,10 +3,10 @@ import { ReactComponent as ReactSprite } from 'images/sprite.svg';
 
 import classNames from 'classnames';
 
-import {
-  useGetBinContactsQuery,
-  useDeleteBinContactMutation,
-} from 'store/bin/binAPI';
+// import {
+//   useGetBinContactsQuery,
+//   useDeleteBinContactMutation,
+// } from 'store/bin/binAPI';
 import { useAddContactMutation } from 'store/contacts/contsctsAPI';
 
 import { Loader } from 'components/Loader/Loader';
@@ -15,12 +15,12 @@ import { Button } from 'components/Button/Button';
 import { toast } from 'react-toastify';
 
 function BinContactListItem({ el }) {
-  const [deleteContact, { isLoading }] = useDeleteBinContactMutation();
+  // const [deleteContact, { isLoading }] = useDeleteBinContactMutation();
   const [restoreContact] = useAddContactMutation();
 
   const restoreContactHandler = contact => {
     restoreContact({ contact });
-    deleteContact(contact.id);
+    // deleteContact(contact.id);
     toast.success(
       `You successfully restored "${contact.name.toUpperCase()}" back to conacts!`,
     );
@@ -28,7 +28,7 @@ function BinContactListItem({ el }) {
 
   return (
     <>
-      {isLoading ? <Loader size={30} color={'rgba(1, 107, 110, 0.3)'} /> : null}
+      {/* {isLoading ? <Loader size={30} color={'rgba(1, 107, 110, 0.3)'} /> : null} */}
       <svg className={s.icon}>
         <use href="#icon-perm_contact"></use>
       </svg>
@@ -52,7 +52,7 @@ function BinContactListItem({ el }) {
           iconClass={'binIcon'}
           iconName={'icon-delete_forever'}
           text="Delete"
-          onClick={() => deleteContact(el.id)}
+          // onClick={() => deleteContact(el.id)}
           disabled={false}
         />
       </div>
@@ -61,7 +61,7 @@ function BinContactListItem({ el }) {
 }
 
 function BinContactsList({ toast }) {
-  const { data: contacts, isFetching } = useGetBinContactsQuery();
+  const { data: contacts, isFetching } = [];
 
   return (
     <div>
