@@ -29,11 +29,10 @@ function App() {
   const { data, isFetching } = useGetCurrenthUserQuery();
 
   useEffect(() => {
-    const token = store.getState().auth.token;
+    const token = store.getState().auth?.token;
 
-    if (token && data) {
-      dispatch(setUser({ user: data, token }));
-    }
+    if (!token && !data) return;
+    else dispatch(setUser({ user: data, token }));
   }, [data, dispatch]);
 
   return (

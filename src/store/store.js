@@ -14,9 +14,10 @@ import logger from 'redux-logger';
 import { configureStore } from '@reduxjs/toolkit';
 import { combineReducers } from 'redux';
 
-import { filterReducer } from './filter/reducer-filter';
-import { emptySplitApi } from 'store/mainAPISlice';
 import { authReducer } from 'store/auth/auth-slice';
+import { filterReducer } from './filter/reducers-filter';
+import { binReducer } from './bin/reducers-bin';
+import { emptySplitApi } from 'store/mainAPISlice';
 
 const authPersistConfig = {
   key: 'auth',
@@ -27,6 +28,7 @@ const authPersistConfig = {
 const rootReducer = combineReducers({
   auth: persistReducer(authPersistConfig, authReducer),
   filter: filterReducer,
+  bin: binReducer,
   [emptySplitApi.reducerPath]: emptySplitApi.reducer,
 });
 

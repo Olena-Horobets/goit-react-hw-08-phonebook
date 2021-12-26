@@ -3,10 +3,11 @@ import classNames from 'classnames';
 import { ReactComponent as ReactSprite } from 'images/sprite.svg';
 
 import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { useDeleteContactMutation } from 'store/contacts/contsctsAPI';
-// import { useAddBinContactMutation } from 'store/bin/binAPI';
+import { moveToBin } from 'store/bin/actions-bin';
 
 import { Button } from 'components/Button/Button';
 import { Loader } from 'components/Loader/Loader';
@@ -14,15 +15,22 @@ import { Loader } from 'components/Loader/Loader';
 function ContactItem({ name, number, id }) {
   const [isHovered, setIsHovered] = useState(false);
 
-  const [deleteContact, { data, isLoading }] = useDeleteContactMutation();
-  // const [addToBin] = useAddBinContactMutation();
+  const [deleteContact, res] = useDeleteContactMutation();
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!data) return;
-    // addToBin({ contact: data });
-
+    // if (!data) return;
+    // console.log(data);
+    // console.log(res);
+    // console.log(name, number, id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data]);
+  }, [res]);
+
+  const deleteHandling = () => {
+    deleteContact(id);
+    dispatch(moveToBin({ name, number, id }));
+  };
 
   return (
     <div
@@ -34,7 +42,7 @@ function ContactItem({ name, number, id }) {
         setIsHovered(false);
       }}
     >
-      {isLoading ? <Loader size={30} color={'rgba(1, 107, 110, 0.3)'} /> : null}
+      {/* {isLoading ? <Loader size={30} color={'rgba(1, 107, 110, 0.3)'} /> : null} */}
       <ReactSprite />
       <div className={s.itemInfo}>
         <span className={s.itemName}>
@@ -60,7 +68,7 @@ function ContactItem({ name, number, id }) {
           iconClass={'deleteIcon'}
           iconName={'icon-delete'}
           text="Move to trash"
-          onClick={() => deleteContact(id)}
+          onClick={() => deleteHandling({ id, name, number })}
           disabled={false}
         />
       </div>

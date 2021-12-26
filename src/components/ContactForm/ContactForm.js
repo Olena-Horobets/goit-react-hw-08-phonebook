@@ -44,7 +44,7 @@ function ContactForm({ toast }) {
       setContactName(newName);
     }
 
-    addContact({ name: contactName, number: contactNumber });
+    addContact({ contact: { name: contactName, number: contactNumber } });
 
     toast.success(
       `Contact "${contactName.toUpperCase()}" added to your list successfully!`,

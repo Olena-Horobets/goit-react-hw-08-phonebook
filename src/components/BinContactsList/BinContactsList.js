@@ -2,11 +2,8 @@ import s from './BinContactsList.module.css';
 import { ReactComponent as ReactSprite } from 'images/sprite.svg';
 
 import classNames from 'classnames';
+import { useDispatch, useSelector } from 'react-redux';
 
-// import {
-//   useGetBinContactsQuery,
-//   useDeleteBinContactMutation,
-// } from 'store/bin/binAPI';
 import { useAddContactMutation } from 'store/contacts/contsctsAPI';
 
 import { Loader } from 'components/Loader/Loader';
@@ -15,6 +12,7 @@ import { Button } from 'components/Button/Button';
 import { toast } from 'react-toastify';
 
 function BinContactListItem({ el }) {
+  const dispatch = useDispatch();
   // const [deleteContact, { isLoading }] = useDeleteBinContactMutation();
   const [restoreContact] = useAddContactMutation();
 
@@ -61,8 +59,9 @@ function BinContactListItem({ el }) {
 }
 
 function BinContactsList({ toast }) {
-  const { data: contacts, isFetching } = [];
-
+  const contacts = useSelector(state => state.bin);
+  // const { data: contacts, isFetching } = [];
+  console.log(contacts);
   return (
     <div>
       {contacts?.length ? (
@@ -73,9 +72,10 @@ function BinContactsList({ toast }) {
             </li>
           ))}
         </ul>
-      ) : isFetching ? (
-        <Loader size={60} color={'rgba(252, 0, 0, 0.3)'} />
       ) : (
+        //  : isFetching ? (
+        //   <Loader size={60} color={'rgba(252, 0, 0, 0.3)'} />
+        // )
         <EmptyMessage message="You don't have any contacts in the trash" />
       )}
       <ReactSprite />

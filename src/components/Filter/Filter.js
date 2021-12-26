@@ -1,10 +1,9 @@
 import s from 'components/Filter/Filter.module.css';
 import { ReactComponent as ReactSprite } from 'images/sprite.svg';
 
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
-import { setFilter, resetFilter } from 'store/filter/action-filter';
+import { setFilter, resetFilter } from 'store/filter/actions-filter';
 
 function Filter() {
   const filter = useSelector(state => state.filter);
