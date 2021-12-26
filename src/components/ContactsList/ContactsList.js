@@ -1,4 +1,4 @@
-import s from 'components/ContactsList/ContactsList.module.css';
+import s from './ContactsList.module.css';
 
 import PropTypes from 'prop-types';
 

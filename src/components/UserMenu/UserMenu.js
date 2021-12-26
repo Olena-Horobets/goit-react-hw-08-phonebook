@@ -25,13 +25,15 @@ function UserMenu() {
     <div className={s.userMenu}>
       <ReactSprite />
 
-      {user?.name && <p className={s.text}>{`Hello, ${user.name}`}</p>}
+      {user?.name && (
+        <p className={s.text}>{`Nice to see you, ${user.name}!`}</p>
+      )}
       <svg className={s.icon}>
         <use href="#icon-account_circle"></use>
       </svg>
 
       <Button
-        type="submit"
+        type="button"
         styledClass="authBtn"
         iconName="icon-logout"
         iconClass="formBtnIcon"

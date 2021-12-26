@@ -1,0 +1,47 @@
+.wrapper {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: 550px;
+}
+
+.text {
+  color: #efad1a;
+  opacity: 0.9;
+}
+
+.letter {
+  opacity: 0;
+  position: relative;
+
+  transform: translateY(-10px);
+  animation: letters 750ms ease-in-out forwards;
+}
+
+.letter:nth-child(4n) {
+  color: #777d15;
+}
+
+.letter:nth-child(4n + 2) {
+  color: #ef6931;
+}
+
+.letter:nth-child(4n + 3) {
+  color: var(--accent-color);
+}
+
+@keyframes letters {
+  0% {
+    opacity: 1;
+    bottom: -0.4em;
+  }
+  50% {
+    bottom: 0.4em;
+  }
+  100% {
+    opacity: 1;
+    bottom: 0;
+  }
+}

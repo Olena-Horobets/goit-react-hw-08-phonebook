@@ -3,7 +3,7 @@ import 'App.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { PublicRoute } from 'components/PublicRoute';
 import { PrivateRoute } from 'components/PrivateRoute';
 
@@ -14,6 +14,7 @@ import { setUser } from 'store/auth/auth-slice';
 import { useGetCurrenthUserQuery } from 'store/auth/authAPI';
 
 import { Loader } from 'components/Loader/Loader';
+import { HomeView } from 'views/HomeView/HomeView';
 import { RegisterView } from 'views/RegisterView/RegisterView';
 import { LogInView } from 'views/LogInView/LogInView';
 import { ContactsView } from 'views/ContactsView/ContactsView';
@@ -43,6 +44,7 @@ function App() {
         <div className="container">
           {!isFetching ? (
             <Routes>
+              <Route path="/" element={<HomeView />} />
               <Route
                 path="/contacts/*"
                 element={
@@ -92,6 +94,7 @@ function App() {
                   </PublicRoute>
                 }
               />
+              <Route path="*" element={<Navigate to="/" />} />
             </Routes>
           ) : (
             <Loader size={100} color={'rgba(1, 107, 110, 0.1)'} />
