@@ -5,6 +5,18 @@
   padding: 0;
 }
 
+.listControls {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 30px;
+  list-style: none;
+}
+
+.listControlsItem:not(:last-child) {
+  margin-right: 20px;
+}
+
 .item {
   position: relative;
   display: flex;

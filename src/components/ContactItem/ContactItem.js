@@ -2,7 +2,7 @@ import s from 'components/ContactItem/ContactItem.module.css';
 import classNames from 'classnames';
 import { ReactComponent as ReactSprite } from 'images/sprite.svg';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -15,17 +15,9 @@ import { Loader } from 'components/Loader/Loader';
 function ContactItem({ name, number, id }) {
   const [isHovered, setIsHovered] = useState(false);
 
-  const [deleteContact, res] = useDeleteContactMutation();
+  const [deleteContact, { isLoading }] = useDeleteContactMutation();
 
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    // if (!data) return;
-    // console.log(data);
-    // console.log(res);
-    // console.log(name, number, id);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [res]);
 
   const deleteHandling = () => {
     deleteContact(id);
@@ -42,7 +34,7 @@ function ContactItem({ name, number, id }) {
         setIsHovered(false);
       }}
     >
-      {/* {isLoading ? <Loader size={30} color={'rgba(1, 107, 110, 0.3)'} /> : null} */}
+      {isLoading ? <Loader size={30} color={'rgba(1, 107, 110, 0.3)'} /> : null}
       <ReactSprite />
       <div className={s.itemInfo}>
         <span className={s.itemName}>

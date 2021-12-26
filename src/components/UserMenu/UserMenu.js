@@ -16,9 +16,11 @@ function UserMenu() {
 
   const dispatch = useDispatch();
 
-  const handleLogOut = async e => {
-    logOutUser();
-    dispatch(resetUser());
+  const handleLogOut = e => {
+    if (window.confirm('Your trash can will be cleared')) {
+      logOutUser();
+      dispatch(resetUser());
+    }
   };
 
   return (

@@ -73,6 +73,7 @@ function LogInView({ toast }) {
           onChange={handleChange}
           className={s.input}
           autoComplete="off"
+          autoFocus
           required
         />
       </label>
