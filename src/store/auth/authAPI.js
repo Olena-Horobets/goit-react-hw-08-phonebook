@@ -25,6 +25,12 @@ const authAPI = emptySplitApi.injectEndpoints({
         providesTags: ['Users'],
       }),
     }),
+    getCurrenthUser: builder.query({
+      query: () => ({
+        url: `/users/current`,
+        providesTags: ['Users'],
+      }),
+    }),
   }),
   overrideExisting: false,
 });
@@ -33,4 +39,5 @@ export const {
   useCreateUserMutation,
   useLogInUserMutation,
   useLogOutUserMutation,
+  useGetCurrenthUserQuery,
 } = authAPI;

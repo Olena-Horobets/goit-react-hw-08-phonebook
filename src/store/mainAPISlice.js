@@ -5,7 +5,7 @@ export const emptySplitApi = createApi({
     baseUrl: 'https://connections-api.herokuapp.com',
     prepareHeaders: (headers, { getState }) => {
       const token = getState().auth.token;
-      console.log(token);
+
       if (token) {
         headers.set('Authorization', `Bearer ${token}`);
       }
