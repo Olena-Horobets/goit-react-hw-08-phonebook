@@ -1,10 +1,11 @@
 import { Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-function PublicRoute({ children, restricted, navigateTo = '/' }) {
+function PublicRoute({ children, restricted = false }) {
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
+  const shouldRedirect = isLoggedIn && restricted;
 
-  return !isLoggedIn && restricted ? children : <Navigate to={navigateTo} />;
+  return !shouldRedirect ? children : <Navigate replace to="/contacts" />;
 }
 
 export { PublicRoute };

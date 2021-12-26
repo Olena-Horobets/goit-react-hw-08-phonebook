@@ -8,7 +8,7 @@ function Navigation() {
     <nav className={s.nav}>
       <ReactSprite />
       <NavLink
-        to={{ pathname: '/' }}
+        to={{ pathname: '' }}
         className={props => (props.isActive ? s.activeLink : s.link)}
         end
       >
@@ -17,7 +17,7 @@ function Navigation() {
         </svg>
       </NavLink>
       <NavLink
-        to={{ pathname: '/deleted' }}
+        to={{ pathname: 'deleted' }}
         className={props => (props.isActive ? s.activeLink : s.link)}
         end
       >

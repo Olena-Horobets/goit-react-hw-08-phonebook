@@ -2,7 +2,7 @@ import s from './LogInView.module.css';
 
 import { useState, useEffect } from 'react';
 
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 import { Button } from 'components/Button/Button';
 import classNames from 'classnames';
@@ -25,7 +25,6 @@ function LogInView({ toast }) {
       dispatch(setUser(data));
       resetForm();
     } else if (error) {
-      console.log(error);
       toast.error('Your request failed');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -46,7 +45,7 @@ function LogInView({ toast }) {
     }
   };
 
-  const handleSubmit = async e => {
+  const handleSubmit = e => {
     e.preventDefault();
 
     const user = { email: userEmail, password: userPassword };

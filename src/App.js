@@ -12,6 +12,10 @@ import { LogInView } from 'views/LogInView/LogInView';
 import { ContactsView } from 'views/ContactsView/ContactsView';
 import { Header } from 'components/Header/Header';
 
+import { ContactForm } from 'components/ContactForm/ContactForm';
+import { BinContactsList } from 'components/BinContactsList/BinContactsList';
+import { Section } from 'components/Section/Section';
+
 function App() {
   return (
     <BrowserRouter>
@@ -21,33 +25,54 @@ function App() {
         <div className="container">
           <Routes>
             <Route
-              path="/register"
-              exact
+              path="/contacts/*"
               element={
-                <PublicRoute restricted navigateTo="/">
-                  <RegisterView toast={toast} />
-                </PublicRoute>
-              }
-            ></Route>
-            <Route
-              path="/login"
-              exact
-              element={
-                <PublicRoute restricted navigateTo="/">
-                  <LogInView toast={toast} />
-                </PublicRoute>
-              }
-            ></Route>
-
-            <Route
-              path="/"
-              exact
-              element={
-                <PrivateRoute navigateTo="/login">
+                <PrivateRoute>
                   <ContactsView toast={toast} />
                 </PrivateRoute>
               }
-            ></Route>
+            >
+              <Route
+                path=""
+                element={
+                  <Section
+                    styledClass="newContact"
+                    title="Create new contact"
+                    iconName={'icon-add_ic_call'}
+                  >
+                    <ContactForm toast={toast} />
+                  </Section>
+                }
+              />
+              <Route
+                path="deleted"
+                element={
+                  <Section
+                    styledClass="deleted"
+                    title="Deleted contacts"
+                    iconName={'icon-delete_sweep'}
+                  >
+                    <BinContactsList toast={toast} />
+                  </Section>
+                }
+              />
+            </Route>
+            <Route
+              path="/register"
+              element={
+                <PublicRoute restricted>
+                  <RegisterView toast={toast} />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path="/login"
+              element={
+                <PublicRoute restricted>
+                  <LogInView toast={toast} />
+                </PublicRoute>
+              }
+            />
           </Routes>
         </div>
       </div>

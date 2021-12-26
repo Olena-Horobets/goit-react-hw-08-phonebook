@@ -2,6 +2,9 @@ import s from 'components/ContactForm/ContactForm.module.css';
 
 import { useState } from 'react';
 
+import { useAddContactMutation } from 'store/contacts/contsctsAPI';
+import { GetVisibleContacts } from 'services/getVisibleContacts';
+
 import shortId from 'short-id';
 import PropTypes from 'prop-types';
 
@@ -11,9 +14,12 @@ import classNames from 'classnames';
 const nameInputId = shortId.generate();
 const numberInputId = shortId.generate();
 
-function ContactForm({ onSubmit }) {
+function ContactForm({ toast }) {
   const [contactName, setContactName] = useState('');
   const [contactNumber, setContactNumber] = useState('');
+
+  const [addContact] = useAddContactMutation();
+  const { contacts } = GetVisibleContacts();
 
   const handleChange = e => {
     const { name, value } = e.currentTarget;
@@ -23,7 +29,26 @@ function ContactForm({ onSubmit }) {
   const handleSubmit = e => {
     e.preventDefault();
 
-    onSubmit({ name: contactName, number: contactNumber });
+    const savedContact = contacts?.find(el => el.number === contactNumber);
+    if (savedContact) {
+      toast.error(
+        `This number is already saved under "${savedContact.name.toUpperCase()}" name`,
+      );
+      return;
+    }
+
+    if (contacts?.some(el => el.name === contactName)) {
+      const newName = prompt(
+        'This name is alreday used. Please, use different name',
+      );
+      setContactName(newName);
+    }
+
+    addContact({ name: contactName, number: contactNumber });
+
+    toast.success(
+      `Contact "${contactName.toUpperCase()}" added to your list successfully!`,
+    );
     resetForm();
   };
 
@@ -83,7 +108,7 @@ function ContactForm({ onSubmit }) {
 }
 
 ContactForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
+  toast: PropTypes.func,
 };
 
 export { ContactForm };
