@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 
 function AuthNav() {
   return (
-    <nav className="">
+    <div className={s.authNav}>
       <ReactSprite />
       <NavLink
         to={{ pathname: '/register' }}
@@ -13,6 +13,9 @@ function AuthNav() {
         end
       >
         Sign up
+        <svg className={s.icon}>
+          <use href="#icon-person_add"></use>
+        </svg>
       </NavLink>
       <NavLink
         to={{ pathname: '/login' }}
@@ -20,8 +23,11 @@ function AuthNav() {
         end
       >
         Log in
+        <svg className={s.icon}>
+          <use href="#icon-login"></use>
+        </svg>
       </NavLink>
-    </nav>
+    </div>
   );
 }
 

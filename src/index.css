@@ -8,6 +8,9 @@
   --primary-btn: rgba(95, 158, 160, 0.329);
 
   --outer-shadow: 2px 2px 6px rgba(0, 0, 0, 0.322);
+  --inner-shadow: inset 3px 3px 8px rgba(0, 0, 0, 0.349);
+  --inner-accent-shadow: inset 4px 4px 12px rgba(8, 0, 54, 0.548),
+    inset -1px -1px 4px rgba(8, 0, 54, 0.185);
 
   --main-animation: 120ms ease-out;
 }

@@ -1,0 +1,19 @@
+.userMenu {
+  display: flex;
+  align-items: flex-end;
+  margin-left: auto;
+}
+
+.text {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--accent-color);
+}
+
+.icon {
+  width: 32px;
+  height: 32px;
+  fill: var(--accent-color);
+  margin-left: 6px;
+  margin-right: 16px;
+}

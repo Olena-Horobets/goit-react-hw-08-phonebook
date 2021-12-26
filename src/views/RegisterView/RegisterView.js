@@ -2,7 +2,7 @@ import s from './RegisterView.module.css';
 
 import { useState, useEffect } from 'react';
 
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 import { Button } from 'components/Button/Button';
 import classNames from 'classnames';
@@ -34,7 +34,7 @@ function RegisterView({ toast }) {
   }, [data, error]);
 
   const formComplited =
-    userName.length && userEmail.length && userPassword.length;
+    userName.length && userEmail.length && userPassword.length >= 7;
 
   const handleChange = e => {
     const { name, value } = e.currentTarget;
@@ -65,8 +65,16 @@ function RegisterView({ toast }) {
     setUserPassword('');
   };
 
+  const getFormClass = () => {
+    return userEmail.length
+      ? 'formPlusPlus'
+      : userName.length
+      ? 'formPlus'
+      : 'form';
+  };
+
   return (
-    <form onSubmit={handleSubmit} className={s.form}>
+    <form onSubmit={handleSubmit} className={s[getFormClass()]}>
       <label htmlFor="name" className={s.label}>
         Name
         <input
@@ -80,43 +88,51 @@ function RegisterView({ toast }) {
           required
         />
       </label>
-      <label htmlFor="email" className={s.emerged}>
-        Email
-        <input
-          type="email"
-          name="email"
-          id="email"
-          value={userEmail}
-          onChange={handleChange}
-          className={s.input}
-          autoComplete="off"
-          required
-        />
-      </label>
-      <label htmlFor="password" className={s.emerged}>
-        Password
-        <input
-          type="password"
-          name="password"
-          id="password"
-          value={userPassword}
-          onChange={handleChange}
-          className={s.input}
-          autoComplete="off"
-          required
-        />
-      </label>
+      {userName.length ? (
+        <label htmlFor="email" className={s.emerged}>
+          Email
+          <input
+            type="email"
+            name="email"
+            id="email"
+            value={userEmail}
+            onChange={handleChange}
+            className={s.input}
+            autoComplete="off"
+            required
+          />
+        </label>
+      ) : null}
+      {userEmail.length ? (
+        <label htmlFor="password" className={s.emerged}>
+          Password
+          <input
+            type="password"
+            name="password"
+            id="password"
+            value={userPassword}
+            onChange={handleChange}
+            className={s.input}
+            autoComplete="off"
+            required
+          />
+        </label>
+      ) : null}
 
       <Button
         type="submit"
         styledClass={classNames('btn', 'formBtn')}
-        iconName={'icon-add'}
+        iconName={'icon-person_add'}
         iconClass={'formBtnIcon'}
-        text="Register"
+        text="Sign up"
         disabled={!formComplited}
       />
     </form>
   );
 }
+
+RegisterView.propTypes = {
+  toast: PropTypes.func,
+};
 
 export { RegisterView };

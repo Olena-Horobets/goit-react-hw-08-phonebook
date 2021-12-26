@@ -1,8 +1,8 @@
-import s from './LogInView.module.css';
+import s from 'views/RegisterView/RegisterView.module.css';
 
 import { useState, useEffect } from 'react';
 
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 import { Button } from 'components/Button/Button';
 import classNames from 'classnames';
@@ -30,7 +30,7 @@ function LogInView({ toast }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, error]);
 
-  const formComplited = userEmail.length && userPassword.length;
+  const formComplited = userEmail.length && userPassword.length >= 7;
 
   const handleChange = e => {
     const { name, value } = e.currentTarget;
@@ -57,9 +57,13 @@ function LogInView({ toast }) {
     setUserPassword('');
   };
 
+  const getFormClass = () => {
+    return userEmail.length ? 'formPlus' : 'form';
+  };
+
   return (
-    <form onSubmit={handleSubmit} className={s.form}>
-      <label htmlFor="email" className={s.emerged}>
+    <form onSubmit={handleSubmit} className={s[getFormClass()]}>
+      <label htmlFor="email" className={s.label}>
         Email
         <input
           type="email"
@@ -72,30 +76,36 @@ function LogInView({ toast }) {
           required
         />
       </label>
-      <label htmlFor="password" className={s.emerged}>
-        Password
-        <input
-          type="password"
-          name="password"
-          id="password"
-          value={userPassword}
-          onChange={handleChange}
-          className={s.input}
-          autoComplete="off"
-          required
-        />
-      </label>
+      {userEmail.length ? (
+        <label htmlFor="password" className={s.emerged}>
+          Password
+          <input
+            type="password"
+            name="password"
+            id="password"
+            value={userPassword}
+            onChange={handleChange}
+            className={s.input}
+            autoComplete="off"
+            required
+          />
+        </label>
+      ) : null}
 
       <Button
         type="submit"
         styledClass={classNames('btn', 'formBtn')}
-        iconName={'icon-add'}
+        iconName={'icon-login'}
         iconClass={'formBtnIcon'}
-        text="Register"
+        text="Log in"
         disabled={!formComplited}
       />
     </form>
   );
 }
+
+LogInView.propTypes = {
+  toast: PropTypes.func,
+};
 
 export { LogInView };

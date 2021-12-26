@@ -1,0 +1,37 @@
+.authNav {
+  display: flex;
+  margin-left: auto;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--white-color);
+  background-color: var(--accent-color);
+  border-radius: 4px;
+  padding: 8px 14px;
+  font-weight: 600;
+  font-size: 18px;
+  opacity: 0.6;
+  box-shadow: var(--inner-shadow);
+
+  transition: opacity var(--main-animation), box-shadow var(--main-animation);
+}
+
+.link:not(:last-child) {
+  margin-right: 16px;
+}
+
+.activeLink {
+  composes: link;
+  opacity: 1;
+  box-shadow: var(--inner-accent-shadow);
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  margin-left: 6px;
+  fill: currentColor;
+}

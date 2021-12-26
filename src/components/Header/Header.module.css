@@ -3,5 +3,12 @@
   text-align: center;
   background-color: var(--darker-bgr-color);
   box-shadow: var(--outer-shadow);
-  padding: 16px;
+  padding: 16px 40px;
+  display: flex;
+}
+
+.title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }

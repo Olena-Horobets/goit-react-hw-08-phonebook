@@ -10,7 +10,8 @@
   transform: scale(1);
 
   transition: transform var(--main-animation), box-shadow var(--main-animation),
-    color var(--main-animation), background-color var(--main-animation);
+    color var(--main-animation), background-color var(--main-animation),
+    opacity var(--main-animation);
 }
 
 .btn::before {
@@ -125,4 +126,27 @@
 
 .binItemBtn:active {
   background-color: rgba(14, 32, 194, 0.726);
+}
+
+/* authentification btn */
+.authBtn {
+  display: inline-flex;
+  align-items: center;
+  border: none;
+  color: var(--white-color);
+  background-color: var(--accent-color);
+  border-radius: 4px;
+  padding: 8px 14px;
+  font-weight: 600;
+  font-size: 18px;
+  opacity: 0.6;
+  cursor: pointer;
+  box-shadow: var(--inner-shadow);
+
+  transition: opacity var(--main-animation), box-shadow var(--main-animation);
+}
+
+.authBtn:hover {
+  opacity: 1;
+  box-shadow: var(--inner-accent-shadow);
 }

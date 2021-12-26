@@ -1,0 +1,73 @@
+.form {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background-color: var(--white-color);
+  box-shadow: var(--outer-shadow);
+  border-radius: 4px;
+  width: 550px;
+  height: 200px;
+  padding: 30px 60px;
+  margin-left: auto;
+  margin-right: auto;
+
+  transition: height 170ms ease-out;
+}
+
+.formPlus {
+  composes: form;
+  height: 260px;
+}
+
+.formPlusPlus {
+  composes: form;
+  height: 320px;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 20px;
+}
+
+.emerged {
+  composes: label;
+  animation: emerge 170ms ease-out;
+}
+
+@keyframes emerge {
+  0% {
+    opacity: 0;
+    transform: translate(0, -30%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0, 0%);
+  }
+}
+
+.input {
+  width: 100%;
+  height: 40px;
+  padding: 6px 10px;
+  border: none;
+  font-weight: 600;
+  border-radius: 4px;
+  background-color: var(--primary-bgr-color);
+  box-shadow: inset 2px 2px 6px rgba(0, 0, 0, 0.322);
+
+  transition: box-shadow var(--main-animation),
+    background-color var(--main-animation);
+}
+
+.input:focus {
+  outline: none;
+  background-color: var(--darker-bgr-color);
+  box-shadow: inset 3px 3px 8px rgba(0, 0, 0, 0.349);
+}
