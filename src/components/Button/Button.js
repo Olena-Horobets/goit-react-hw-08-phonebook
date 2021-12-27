@@ -1,7 +1,6 @@
-import 'components/Button/Button.css';
-
-import PropTypes from 'prop-types';
+import s from 'components/Button/Button.module.css';
 import { ReactComponent as ReactSprite } from 'images/sprite.svg';
+import PropTypes from 'prop-types';
 
 function Button({
   type,
@@ -15,14 +14,14 @@ function Button({
   return (
     <button
       type={type}
-      className={styledClass}
+      className={s[styledClass]}
       disabled={disabled}
       onClick={onClick}
     >
       <ReactSprite />
       {text}
 
-      <svg className={iconClass}>
+      <svg className={s[iconClass]}>
         <use href={`#${iconName}`}></use>
       </svg>
     </button>

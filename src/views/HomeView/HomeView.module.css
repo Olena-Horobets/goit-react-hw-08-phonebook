@@ -17,7 +17,7 @@
   position: relative;
 
   transform: translateY(-10px);
-  animation: letters 750ms ease-in-out forwards;
+  animation: letters 500ms ease-in-out forwards;
 }
 
 .letter:nth-child(4n) {

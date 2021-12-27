@@ -29,6 +29,7 @@ function Filter() {
           value={filter}
           onChange={filterSearchedContactsHandler}
           autoComplete="off"
+          aria-label="filter contacts"
         ></input>
         <button
           className={filter ? s.filterBtnEmerged : s.filterBtn}

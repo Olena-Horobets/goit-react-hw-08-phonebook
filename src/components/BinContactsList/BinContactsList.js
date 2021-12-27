@@ -1,7 +1,6 @@
 import s from './BinContactsList.module.css';
 import { ReactComponent as ReactSprite } from 'images/sprite.svg';
 
-import classNames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { useAddContactMutation } from 'store/contacts/contsctsAPI';
@@ -37,18 +36,18 @@ function BinContactListItem({ el }) {
       <div className={s.controls}>
         <Button
           type="button"
-          styledClass={classNames('btn', 'binItemBtn')}
-          iconClass={'binIcon'}
-          iconName={'icon-restore'}
+          styledClass="binItemBtn"
+          iconClass="binIcon"
+          iconName="icon-restore"
           text="Restore"
           onClick={() => restoreContactHandler(el)}
           disabled={false}
         />
         <Button
           type="button"
-          styledClass={classNames('btn', 'binItemBtn', 'deleteForever')}
-          iconClass={'binIcon'}
-          iconName={'icon-delete_forever'}
+          styledClass="deleteForever"
+          iconClass="binIcon"
+          iconName="icon-delete_forever"
           text="Delete"
           onClick={() => dispatch(deleteFromBin({ id: el.id }))}
           disabled={false}
@@ -77,9 +76,9 @@ function BinContactsList({ toast }) {
             <li className={s.listControlsItem}>
               <Button
                 type="button"
-                styledClass={classNames('btn', 'binItemBtn')}
-                iconClass={'binIcon'}
-                iconName={'icon-restore'}
+                styledClass="binItemBtn"
+                iconClass="binIcon"
+                iconName="icon-restore"
                 text="Restore All"
                 onClick={restoreContactHandler}
                 disabled={false}
@@ -88,9 +87,9 @@ function BinContactsList({ toast }) {
             <li className={s.controlsItem}>
               <Button
                 type="button"
-                styledClass={classNames('btn', 'binItemBtn', 'deleteForever')}
-                iconClass={'binIcon'}
-                iconName={'icon-delete_forever'}
+                styledClass="deleteForever"
+                iconClass="binIcon"
+                iconName="icon-delete_forever"
                 text="Delete All"
                 onClick={() => dispatch(deleteAllFromBin())}
                 disabled={false}
@@ -113,4 +112,4 @@ function BinContactsList({ toast }) {
   );
 }
 
-export { BinContactsList };
+export default BinContactsList;

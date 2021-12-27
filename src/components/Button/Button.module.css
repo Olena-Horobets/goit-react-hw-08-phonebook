@@ -20,8 +20,8 @@
   left: -8%;
   content: '';
   display: block;
-  width: 115%;
-  height: 115%;
+  width: 116%;
+  height: 116%;
   border-radius: 4px;
   background-color: transparent;
 }
@@ -37,6 +37,7 @@
 
 /* form button specifically */
 .formBtn {
+  composes: btn;
   position: absolute;
   bottom: 20px;
   padding: 8px 16px;
@@ -64,8 +65,9 @@
 
 /* contacts item button specifically */
 .deleteBtn {
+  composes: btn;
   font-size: 10px;
-  background-color: rgba(252, 0, 0, 0.514);
+  background-color: var(--red-tr-color);
   color: var(--white-color);
   padding: 4px 10px;
   letter-spacing: 1px;
@@ -77,14 +79,15 @@
 }
 
 .deleteBtn:hover {
-  background-color: rgba(252, 0, 0, 0.705);
+  background-color: var(--red-accent-color);
 }
 
 .deleteBtn:active {
-  background-color: rgba(14, 32, 194, 0.726);
+  background-color: var(--blue-accent-color);
 }
 
 .emergedBtn {
+  composes: deleteBtn;
   opacity: 1;
   transform: translateY(0%);
 }
@@ -98,10 +101,10 @@
 
 /* deleted items btn */
 .binItemBtn {
+  composes: btn;
   font-weight: 400;
   background-color: var(--accent-color);
   color: var(--white-color);
-  /* display: flex; */
   padding: 2px 8px;
   justify-content: space-between;
 }
@@ -117,15 +120,16 @@
 }
 
 .deleteForever {
-  background-color: rgba(252, 0, 0, 0.514);
+  composes: binItemBtn;
+  background-color: var(--red-tr-color);
 }
 
 .binItemBtn:hover {
-  background-color: rgba(252, 0, 0, 0.705);
+  background-color: var(--red-accent-color);
 }
 
 .binItemBtn:active {
-  background-color: rgba(14, 32, 194, 0.726);
+  background-color: var(--blue-accent-color);
 }
 
 /* authentification btn */

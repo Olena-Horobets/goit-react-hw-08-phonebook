@@ -1,18 +1,12 @@
 import s from 'components/ContactForm/ContactForm.module.css';
+import PropTypes from 'prop-types';
 
 import { useState } from 'react';
 
 import { useAddContactMutation } from 'store/contacts/contsctsAPI';
 import { GetVisibleContacts } from 'services/getVisibleContacts';
 
-import shortId from 'short-id';
-import PropTypes from 'prop-types';
-
 import { Button } from 'components/Button/Button';
-import classNames from 'classnames';
-
-const nameInputId = shortId.generate();
-const numberInputId = shortId.generate();
 
 function ContactForm({ toast }) {
   const [contactName, setContactName] = useState('');
@@ -62,12 +56,12 @@ function ContactForm({ toast }) {
       onSubmit={handleSubmit}
       className={!contactName ? s.form : s.higherForm}
     >
-      <label htmlFor={nameInputId} className={s.label}>
+      <label htmlFor="nameInput" className={s.label}>
         Name
         <input
           type="text"
           name="name"
-          id={nameInputId}
+          id="nameInput"
           value={contactName}
           onChange={handleChange}
           className={s.input}
@@ -78,12 +72,12 @@ function ContactForm({ toast }) {
         />
       </label>
       {contactName && (
-        <label htmlFor={numberInputId} className={s.emerged}>
+        <label htmlFor="numberInput" className={s.emerged}>
           Phone number
           <input
             type="tel"
             name="number"
-            id={numberInputId}
+            id="numberInput"
             value={contactNumber}
             onChange={handleChange}
             className={s.input}
@@ -97,9 +91,9 @@ function ContactForm({ toast }) {
 
       <Button
         type="submit"
-        styledClass={classNames('btn', 'formBtn')}
-        iconName={'icon-add'}
-        iconClass={'formBtnIcon'}
+        styledClass="formBtn"
+        iconName="icon-add"
+        iconClass="formBtnIcon"
         text="Add contact"
         disabled={!contactNumber}
       />
@@ -111,4 +105,4 @@ ContactForm.propTypes = {
   toast: PropTypes.func,
 };
 
-export { ContactForm };
+export default ContactForm;

@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 import { GetVisibleContacts } from 'services/getVisibleContacts';
 
 import { Navigation } from 'components/Navigation/Navigation';
-import { Section } from 'components/Section/Section';
+import Section from 'components/Section/Section';
 import { ContactsList } from 'components/ContactsList/ContactsList';
 import { Filter } from 'components/Filter/Filter';
 import { EmptyMessage } from 'components/EmptyMessage/EmptyMessage';
@@ -35,4 +35,4 @@ function ContactsView() {
   );
 }
 
-export { ContactsView };
+export default ContactsView;

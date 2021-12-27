@@ -1,15 +1,13 @@
 import s from './RegisterView.module.css';
-
-import { useState, useEffect } from 'react';
-
 import PropTypes from 'prop-types';
 
-import { Button } from 'components/Button/Button';
-import classNames from 'classnames';
+import { useState, useEffect } from 'react';
 
 import { useCreateUserMutation } from 'store/auth/authAPI';
 import { setUser } from 'store/auth/auth-slice';
 import { useDispatch } from 'react-redux';
+
+import { Button } from 'components/Button/Button';
 
 function RegisterView({ toast }) {
   const [userName, setUserName] = useState('');
@@ -122,9 +120,9 @@ function RegisterView({ toast }) {
 
       <Button
         type="submit"
-        styledClass={classNames('btn', 'formBtn')}
-        iconName={'icon-person_add'}
-        iconClass={'formBtnIcon'}
+        styledClass="formBtn"
+        iconName="icon-person_add"
+        iconClass="formBtnIcon"
         text="Sign up"
         disabled={!formComplited}
       />
@@ -136,4 +134,4 @@ RegisterView.propTypes = {
   toast: PropTypes.func,
 };
 
-export { RegisterView };
+export default RegisterView;
