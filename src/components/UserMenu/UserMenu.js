@@ -1,11 +1,10 @@
 import s from './UserMenu.module.css';
-
 import { ReactComponent as ReactSprite } from 'images/sprite.svg';
-import { useSelector } from 'react-redux';
+
+import { useSelector, useDispatch } from 'react-redux';
 
 import { useLogOutUserMutation } from 'store/auth/authAPI';
 import { resetUser } from 'store/auth/auth-slice';
-import { useDispatch } from 'react-redux';
 
 import { Button } from 'components/Button/Button';
 

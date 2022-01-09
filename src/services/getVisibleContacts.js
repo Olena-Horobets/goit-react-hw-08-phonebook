@@ -2,9 +2,8 @@ import { useSelector } from 'react-redux';
 import { useGetContactsQuery } from 'store/contacts/contsctsAPI';
 
 function GetVisibleContacts() {
-  const { data: contacts, isFetching } = useGetContactsQuery();
-
   const filter = useSelector(state => state.filter);
+  const { data: contacts, isFetching } = useGetContactsQuery();
 
   const renderSearchedContacts = () => {
     const searchValue = filter.toLocaleLowerCase();

@@ -1,5 +1,5 @@
 import 'App.css';
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -8,7 +8,6 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { PublicRoute } from 'components/PublicRoute';
 import { PrivateRoute } from 'components/PrivateRoute';
 
-import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { store } from './store/store';
 import { setUser } from 'store/auth/auth-slice';

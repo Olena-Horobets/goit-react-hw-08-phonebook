@@ -23,6 +23,7 @@ function HomeView() {
 
   const getTextAnimation = () => {
     const text = 'Welcome to your contacts manager';
+
     return text.split('').map(function (el, idx) {
       const style = { animationDelay: 0.5 + idx / 30 + 's' };
 
